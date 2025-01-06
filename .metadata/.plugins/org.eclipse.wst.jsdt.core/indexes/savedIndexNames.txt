@@ -1,8 +1,0 @@
-INDEX VERSION 1.4+C:\Users\ParkEG\Desktop\Projects\Team\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
-715703824.index
-3221321936.index
-425966518.index
-3214953529.index
-731989689.index
-4078298460.index
-2792747889.index
