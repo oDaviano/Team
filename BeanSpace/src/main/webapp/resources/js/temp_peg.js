@@ -82,7 +82,7 @@ $(document).ready(function() {
     var mapDiv = document.getElementById('map');
   map = new naver.maps.Map(mapDiv,mapOptions); 
 
-  btnHtml = '<img src="/assets/images/location.png" width=40px height=40px>',
+  btnHtml = '<img src="/myapp/resources/assets/images/location.png" width=40px height=40px>',
   naver.maps.Event.once(map, 'init', function() {
     //customControl 객체 이용하기
     var customControl = new naver.maps.CustomControl(btnHtml, {
@@ -235,7 +235,7 @@ $(window).on("load", function() {
 
  function setOverlay(callback){
 
- fetch('/datas/data.json')
+ fetch('/myapp/resources/datas/data.json')
  .then((res) => res.json())
  .then((jsonData) => {
 

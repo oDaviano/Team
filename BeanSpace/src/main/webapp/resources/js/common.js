@@ -3,10 +3,12 @@ let _device = {};
 const publish = (function () {
   const common = {
     init: function () {
-      common.setCommon();
+     // common.setCommon();
+      common.setAside();
     },
 
     setCommon: function () {
+    /*
       let currentPage = window.location.pathname; // 현재 페이지 경로
       let basePath = currentPage.includes("index.html")
         ? "pages/"
@@ -35,14 +37,15 @@ const publish = (function () {
           }
           return false;
         },
-      });
+      });*/
     },
+   
     setAside: function () {
 			// 모바일 전체메뉴 오픈
 				const $body = $("body");
 				const $raside = $("aside#rightside");
 				const $buttonMenu = $(".button-menu");
-        console.log($buttonMenu);
+      //  console.log($buttonMenu);
 				$buttonMenu.on("click", function () {
 					$body.toggleClass("ovy-hidden");
           $raside.toggleClass("active");

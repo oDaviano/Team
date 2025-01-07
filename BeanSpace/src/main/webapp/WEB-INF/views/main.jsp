@@ -29,18 +29,18 @@ request.setCharacterEncoding("UTF-8");
 
 	<link type="text/css" rel="stylesheet" href="${contextPath}/resources/assets/css/font.css">
 	<link type="text/css" rel="stylesheet" href="${contextPath}/resources/assets/css/common.css">
-		<link type="text/css" rel="stylesheet" href="${contextPath}/resources/assets/css/temp_peg.css">
+	<link type="text/css" rel="stylesheet" href="${contextPath}/resources/assets/css/tmp_peg.css">
 
-  <link type="text/css" rel="stylesheet" href="/lib/jquery-ui-1.12.1.min.css">
-  <link type="text/css" rel="stylesheet" href="/lib/jquery-ui-1.12.1.theme.min.css">
-  <link type="text/css" rel="stylesheet" href="/lib/swiper-bundle.min.css">
+  <link type="text/css" rel="stylesheet" href="${contextPath}/resources/lib/jquery-ui-1.12.1.min.css">
+  <link type="text/css" rel="stylesheet" href="${contextPath}/resources/lib/jquery-ui-1.12.1.theme.min.css">
+  <link type="text/css" rel="stylesheet" href="${contextPath}/resources/lib/swiper-bundle.min.css">
 
-  <script type="text/javascript" src="/lib/jquery-1.12.4.min.js"></script>
-  <script type="text/javascript" src="/lib/jquery-ui-1.12.1.min.js"></script>
-  <script type="text/javascript" src="/lib/swiper-bundle.min.js"></script>
+  <script type="text/javascript" src="${contextPath}/resources/lib/jquery-1.12.4.min.js"></script>
+  <script type="text/javascript" src="${contextPath}/resources/lib/jquery-ui-1.12.1.min.js"></script>
+  <script type="text/javascript" src="${contextPath}/resources/lib/swiper-bundle.min.js"></script>
 
-  <script type="text/javascript" src="/js/temp_peg.js"></script>
-  <script type="text/javascript" src="/js/common.js"></script>
+  <script type="text/javascript" src="${contextPath}/resources/js/temp_peg.js"></script>
+  <script type="text/javascript" src="${contextPath}/resources/js/common.js"></script>
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=co1ous7685&submodules=geocoder"></script>
@@ -59,7 +59,7 @@ request.setCharacterEncoding("UTF-8");
             <div id="logo">          
                 <img src = "${contextPath}/resources/assets/images/car-icon.png" width="100" height="90"> </div>            
             <div id="button_menu" class="button-menu open-menu">         
-                <img src = /assets/images/List.png width="70" height="70"> 
+                <img src = "${contextPath}/resources/assets/images/List.png" width="70" height="70"> 
            </div>
             </div>
                 </article>
@@ -72,7 +72,7 @@ request.setCharacterEncoding("UTF-8");
                         <article class="sidebar_title">
                             <div class="ux-title">
                                 <div class="account_name">
-                                    <img src = /assets/images/Account.png width="70" height="70"> 
+                                    <img src = "${contextPath}/resources/assets/images/Account.png" width="70" height="70"> 
                                     <div>OOO님</div>
                                 </div>
                             
