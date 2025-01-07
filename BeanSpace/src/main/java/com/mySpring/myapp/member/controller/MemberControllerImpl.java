@@ -131,6 +131,9 @@ public class MemberControllerImpl   implements MemberController {
 		return mav;
 	}
 	
+//	@Override
+//	@RequestMapping(value = "")
+	
 
 	private String getViewName(HttpServletRequest request) throws Exception {
 		String contextPath = request.getContextPath();
