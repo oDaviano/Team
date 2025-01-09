@@ -16,6 +16,12 @@ public class MemberDAOImpl implements MemberDAO {
 	private SqlSession sqlSession;
 
 	@Override
+	public MemberVO  selectMyInfo(String email)throws DataAccessException {
+		MemberVO myInfo = sqlSession.selectOne("mapper.member.selectMyInfo");
+		return myInfo;
+		
+	}
+	@Override
 	public List selectAllMemberList() throws DataAccessException {
 		List<MemberVO> membersList = null;
 		membersList = sqlSession.selectList("mapper.member.selectAllMemberList");
@@ -29,14 +35,15 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 	@Override
-	public int deleteMember(String id) throws DataAccessException {
-		int result = sqlSession.delete("mapper.member.deleteMember", id);
+	public int deleteMember(String email) throws DataAccessException {
+		int result = sqlSession.delete("mapper.member.deleteMember", email);
 		return result;
 	}
 	
 	@Override
 	public MemberVO loginById(MemberVO memberVO) throws DataAccessException{
 		  MemberVO vo = sqlSession.selectOne("mapper.member.loginById",memberVO);
+//			System.out.println(vo.getEmail()+"/"+vo.getPwd()+"/"+vo.getName()+"/"+vo.getPhone()+"/"+vo.getCarnum()+"/"+vo.getMileage());
 		return vo;
 	}
 

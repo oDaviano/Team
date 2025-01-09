@@ -71,7 +71,7 @@ public class BoardControllerImpl  implements BoardController{
 		String imageFileName= upload(multipartRequest);
 		HttpSession session = multipartRequest.getSession();
 		MemberVO memberVO = (MemberVO) session.getAttribute("member");
-		String id = memberVO.getId();
+		String id = memberVO.getEmail();
 		articleMap.put("parentNO", 0);
 		articleMap.put("id", id);
 		articleMap.put("imageFileName", imageFileName);
@@ -153,8 +153,8 @@ public class BoardControllerImpl  implements BoardController{
 	String imageFileName= upload(multipartRequest);
 	HttpSession session = multipartRequest.getSession();
 	MemberVO memberVO = (MemberVO) session.getAttribute("member");
-	String id = memberVO.getId();
-	articleMap.put("id", id);
+	String id = memberVO.getEmail();
+	articleMap.put("email", id);
 	articleMap.put("imageFileName", imageFileName);
 	
 	String articleNO=(String)articleMap.get("articleNO");

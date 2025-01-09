@@ -1,5 +1,6 @@
 package com.mySpring.myapp.member.controller;
 
+import java.util.Enumeration;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.mySpring.myapp.member.dao.MemberDAO;
 import com.mySpring.myapp.member.service.MemberService;
 import com.mySpring.myapp.member.vo.MemberVO;
 
@@ -26,6 +28,8 @@ public class MemberControllerImpl   implements MemberController {
 	private MemberService memberService;
 	@Autowired
 	MemberVO memberVO;
+	@Autowired
+	MemberDAO memberDAO;
 	
 	@RequestMapping(value = { "/","/main.do"}, method = RequestMethod.GET)
 	private ModelAndView main(HttpServletRequest request, HttpServletResponse response) {
@@ -36,16 +40,16 @@ public class MemberControllerImpl   implements MemberController {
 		return mav;
 	}
 	
-	@Override 
-	@RequestMapping(value="/member/listMembers.do" ,method = RequestMethod.GET)
-	public ModelAndView listMembers(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String viewName = (String)request.getAttribute("viewName");
-		System.out.println("listviewName: " + viewName);
-		List membersList = memberService.listMembers();
-		ModelAndView mav = new ModelAndView(viewName);
-		mav.addObject("membersList", membersList);
-		return mav;
-	}
+//	@Override 
+//	@RequestMapping(value="/member/listMembers.do" ,method = RequestMethod.GET)
+//	public ModelAndView listMembers(HttpServletRequest request, HttpServletResponse response) throws Exception {
+//		String viewName = (String)request.getAttribute("viewName");
+//		System.out.println("listviewName: " + viewName);
+//		List membersList = memberService.listMembers();
+//		ModelAndView mav = new ModelAndView(viewName);
+//		mav.addObject("membersList", membersList);
+//		return mav;
+//	}
 
 	@Override
 	@RequestMapping(value="/member/addMember.do" ,method = RequestMethod.POST)
@@ -54,20 +58,20 @@ public class MemberControllerImpl   implements MemberController {
 		request.setCharacterEncoding("utf-8");
 		int result = 0;
 		result = memberService.addMember(member);
-		ModelAndView mav = new ModelAndView("redirect:/member/listMembers.do");
+		ModelAndView mav = new ModelAndView("redirect:/member/user_info.do");
 		return mav;
 	}
 	
-	@Override
-	@RequestMapping(value="/member/removeMember.do" ,method = RequestMethod.GET)
-	public ModelAndView removeMember(@RequestParam("id") String id, 
-			           HttpServletRequest request, HttpServletResponse response) throws Exception{
-		request.setCharacterEncoding("utf-8");
-//		String user_id = request.getParameter("id");
-		memberService.removeMember(id);
-		ModelAndView mav = new ModelAndView("redirect:/member/listMembers.do");
-		return mav;
-	}
+//	@Override
+//	@RequestMapping(value="/member/removeMember.do" ,method = RequestMethod.GET)
+//	public ModelAndView removeMember(@RequestParam("id") String id, 
+//			           HttpServletRequest request, HttpServletResponse response) throws Exception{
+//		request.setCharacterEncoding("utf-8");
+////		String user_id = request.getParameter("id");
+//		memberService.removeMember(id);
+//		ModelAndView mav = new ModelAndView("redirect:/member/listMembers.do");
+//		return mav;
+//	}
 	/*
 	@RequestMapping(value = { "/member/loginForm.do", "/member/memberForm.do" }, method =  RequestMethod.GET)
 	@RequestMapping(value = "/member/*Form.do", method =  RequestMethod.GET)
@@ -85,18 +89,20 @@ public class MemberControllerImpl   implements MemberController {
 				              RedirectAttributes rAttr,
 		                       HttpServletRequest request, HttpServletResponse response) throws Exception {
 	ModelAndView mav = new ModelAndView();
+//	System.out.println(member.getEmail()+"/"+member.getPwd()+"/"+member.getName()+"/"+member.getPhone()+"/"+member.getCarnum()+"/"+member.getMileage());
+	
 	memberVO = memberService.login(member);
 	if(memberVO != null) {
+
 	    HttpSession session = request.getSession();
 	    session.setAttribute("member", memberVO);
 	    session.setAttribute("isLogOn", true);
-	    //mav.setViewName("redirect:/member/listMembers.do");
 	    String action = (String)session.getAttribute("action");
 	    session.removeAttribute("action");
 	    if(action!= null) {	
 	       mav.setViewName("redirect:"+action);
-	    }else {
-	       mav.setViewName("redirect:/member/listMembers.do");	
+	    }else{
+	       mav.setViewName("redirect:/member/user_info.do");	
 	    }
 
 	}else {
@@ -113,7 +119,7 @@ public class MemberControllerImpl   implements MemberController {
 		session.removeAttribute("member");
 		session.removeAttribute("isLogOn");
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("redirect:/member/listMembers.do");
+		mav.setViewName("redirect:/main.do");
 		return mav;
 	}	
 
@@ -128,12 +134,34 @@ public class MemberControllerImpl   implements MemberController {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("result",result);
 		mav.setViewName(viewName);
+		Enumeration<String> attributeNames = session.getAttributeNames();
+        StringBuilder sessionData = new StringBuilder("세션 데이터 목록:<br>");
+
+        // 각 속성의 이름과 값을 출력
+        while (attributeNames.hasMoreElements()) {
+            String attributeName = attributeNames.nextElement();
+            Object attributeValue = session.getAttribute(attributeName);
+            sessionData.append(attributeName).append(": ").append(attributeValue).append("<br>");
+        }
+
 		return mav;
 	}
 	
-//	@Override
-//	@RequestMapping(value = "")
-	
+	@Override
+	@RequestMapping(value = "/member/user_info.do", method =  RequestMethod.GET)
+	public ModelAndView myInfo( HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String viewName = (String)request.getAttribute("viewname");
+		HttpSession session = request.getSession();
+		System.out.println("info: "+session.getAttribute("member"));
+		ModelAndView mav = new ModelAndView();
+//		if(!(boolean) session.getAttribute("isLogOn")){
+//		    
+//		 	   mav.setViewName("redirect:/member/loginForm.do");	
+//		    }
+		mav.setViewName(viewName); 
+		mav.addObject("member",memberVO);
+		return mav;
+	}
 
 	private String getViewName(HttpServletRequest request) throws Exception {
 		String contextPath = request.getContextPath();
@@ -165,6 +193,8 @@ public class MemberControllerImpl   implements MemberController {
 		}
 		return viewName;
 	}
+
+
 
 
 }

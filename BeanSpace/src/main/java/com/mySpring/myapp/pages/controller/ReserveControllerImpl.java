@@ -20,28 +20,19 @@ public class ReserveControllerImpl implements ReserveController{
 	
 	@Autowired
 	private ReserveService reserveService;
-	@Override
-	@RequestMapping(value = { "/", "/main.do"  }, method = RequestMethod.GET)
-	public ModelAndView main(HttpServletRequest request, HttpServletResponse response) {
-		String viewName = (String) request.getAttribute("viewName");
-		ModelAndView mav = new ModelAndView();
-		List<ReserveVO> reserveList = reserveService.listReserves();
-		mav.addObject("campList", reserveList);
-		mav.setViewName(viewName);
-		return mav;
-	}
 
+	@Override
 	@RequestMapping(value = "/pages/list_reservation_detail.do", method = RequestMethod.GET)
-	public ModelAndView viewReserveDetail(@RequestParam("rsvnum") int rsvnum, HttpServletRequest request,
+	public ModelAndView detail(@RequestParam("rsvnum") int rsvnum, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		String viewName = (String) request.getAttribute("viewName");
-		ReserveVO campingSiteVO = reserveService.getReserveByRsvnum(rsvnum);
-		if (campingSiteVO == null) {
+		ReserveVO reserveVO = reserveService.getReserveByRsvnum(rsvnum);
+		if (reserveVO == null) {
 			throw new Exception("Reservation not found for rsvnum: " + rsvnum);
 		}
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName(viewName);
-		mav.addObject("campingSite", campingSiteVO);
+		mav.addObject("reserve", reserveVO);
 		return mav;
 	}
 
@@ -65,7 +56,7 @@ public class ReserveControllerImpl implements ReserveController{
 	}
 
 	@Override
-	@RequestMapping(value = "/pages/list_reservation_detail.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/pages/list_reservation_cancel.do", method = RequestMethod.GET)
 	public ModelAndView removeReserve(@RequestParam("rsvnum") int rsvnum, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		reserveService.removeReserve(rsvnum);
@@ -73,15 +64,5 @@ public class ReserveControllerImpl implements ReserveController{
 		return mav;
 	}
 
-
-	@Override
-	public ModelAndView detail(HttpServletRequest request, HttpServletResponse response) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-
-	
 
 }

@@ -18,6 +18,11 @@ import com.mySpring.myapp.member.vo.MemberVO;
 public class MemberServiceImpl implements MemberService {
 	@Autowired
 	private MemberDAO memberDAO;
+	
+	@Override
+	public MemberVO selectMyInfo(String email) throws DataAccessException {
+		return memberDAO.selectMyInfo(email);
+	}
 
 	@Override
 	public List listMembers() throws DataAccessException {
@@ -38,7 +43,11 @@ public class MemberServiceImpl implements MemberService {
 	
 	@Override
 	public MemberVO login(MemberVO memberVO) throws Exception{
+
 		return memberDAO.loginById(memberVO);
 	}
+
+
+	
 
 }

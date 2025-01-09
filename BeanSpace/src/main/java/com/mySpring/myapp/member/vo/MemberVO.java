@@ -6,29 +6,33 @@ import org.springframework.stereotype.Component;
 
 @Component("memberVO")
 public class MemberVO {
-	private String id;
+	private String email;
 	private String pwd;
 	private String name;
-	private String email;
-	private Date joinDate;
+	private String phone;
+	private String carnum;
+	private int mileage;
 
 	public MemberVO() {
 		
 	}
 
-	public MemberVO(String id, String pwd, String name, String email) {
-		this.id = id;
+	public MemberVO(String email, String pwd, String name, String phone, String carnum, int mileage ) {
+		this.email = email;
 		this.pwd = pwd;
 		this.name = name;
+		this.phone = phone;
+		this.carnum = carnum;
+		this.mileage = mileage;
+	
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
 		this.email = email;
-	}
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
 	}
 
 	public String getPwd() {
@@ -47,20 +51,28 @@ public class MemberVO {
 		this.name = name;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getPhone() {
+		return phone;
+	}
+	
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public String getCarnum() {
+		return carnum;
+	}
+	
+	public void setCarnum(String carnum) {
+		this.carnum = carnum;
+	}
+	
+	public int getMileage() {
+		return mileage;
 	}
 
-	public Date getJoinDate() {
-		return joinDate;
+	public void setMileage(int mileage) {
+		this.mileage = mileage;
+		
 	}
-
-	public void setJoinDate(Date joinDate) {
-		this.joinDate = joinDate;
-	}
-
 }

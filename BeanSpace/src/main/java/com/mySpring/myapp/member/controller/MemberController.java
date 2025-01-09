@@ -12,11 +12,12 @@ import com.mySpring.myapp.member.vo.MemberVO;
 
 
 public interface MemberController {
-	public ModelAndView listMembers(HttpServletRequest request, HttpServletResponse response) throws Exception;
+//	public ModelAndView listMembers(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public ModelAndView addMember(@ModelAttribute("info") MemberVO memberVO,HttpServletRequest request, HttpServletResponse response) throws Exception;
-	public ModelAndView removeMember(@RequestParam("id") String id, HttpServletRequest request, HttpServletResponse response) throws Exception;
+//	public ModelAndView removeMember(@RequestParam("rsvnum") String rsvnum, HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public ModelAndView login(@ModelAttribute("member") MemberVO member,
                               RedirectAttributes rAttr,
                               HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public ModelAndView logout(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public ModelAndView myInfo(HttpServletRequest request, HttpServletResponse response)throws Exception;
 }

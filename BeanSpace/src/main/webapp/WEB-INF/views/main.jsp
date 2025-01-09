@@ -86,12 +86,21 @@ request.setCharacterEncoding("UTF-8");
                         <article>
                     <div class="main">
                         <div class="menu-list">
-                            <ul>
-                                <li style="display:none"><button class="ux-link button-mob-sign in">로그인</button></li>
-                                <li><a href="/pages/user_info.html" class="ux-link">회원 정보</a></li>
+                            <ul>               
+                                <c:choose>
+                                <c:when test="${isLogOn == true  && member!= null}">                                
+                                     <li><a href="/pages/user_info.html" class="ux-link">회원 정보</a></li>
                                 <li><a href="/pages/list_reservation.html" class="ux-link">예약 내역 조회</a></li>
                                 <li><a href="/pages/user_info_edit.html" class="ux-link">개인 정보 수정</a></li>
-                                <li><a href="#" class="ux-link">로그아웃</a></li>
+                                             <li><a href="${contextPath}/member/logout.do" class="ux-link">로그아웃</a></li>
+                                </c:when>
+                                <c:otherwise>
+                                     <li><a  href="${contextPath}/member/loginForm.do"class="ux-link button-mob-sign in">로그인</a></li>
+                                     <li><a href="/pages/list_reservation.html" class="ux-link">예약 내역 조회</a></li>
+                                
+                                </c:otherwise>
+        
+                                </c:choose>
                             </ul>
                         </div>
                     </div>

@@ -7,6 +7,7 @@ import org.springframework.dao.DataAccessException;
 import com.mySpring.myapp.member.vo.MemberVO;
 
 public interface MemberService {
+	public MemberVO selectMyInfo(String email)throws DataAccessException;
 	 public List listMembers() throws DataAccessException;
 	 public int addMember(MemberVO memberVO) throws DataAccessException;
 	 public int removeMember(String id) throws DataAccessException;
