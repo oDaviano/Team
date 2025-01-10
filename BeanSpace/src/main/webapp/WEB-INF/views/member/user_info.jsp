@@ -39,7 +39,8 @@ request.setCharacterEncoding("UTF-8");
 	href="${contextPath}/resources/assets/css/common.css">
 <link type="text/css" rel="stylesheet"
 	href="${contextPath}/resources/assets/css/tmp_njw.css">
-
+<link type="text/css" rel="stylesheet"
+	href="${contextPath}/resources/assets/css/tmp_peg.css">
 <link type="text/css" rel="stylesheet"
 	href="${contextPath}/resources/lib/jquery-ui-1.12.1.min.css">
 <link type="text/css" rel="stylesheet"
@@ -71,52 +72,51 @@ $(function(){
 	  }
 });
 </script>
-
 <body>
-	<div class="container">
+    <div class="container">
+        <header class="header">
+            <div class="car-icon">
+                <a href="${contextPath}/main.do" id="carIconLink">
+                    <img src="${contextPath}/resources/assets/images/car-icon.png" alt="Car Icon">
+                </a>
+            </div>
+            <h1 class="header-title">회원 정보</h1>
+            <div id="button_menu" class="menu-icon">
+                <img src="${contextPath}/resources/assets/images/List.png" alt="menu icon">
+            </div>
+        </header>
 
-		<header class="header">
-			<div class="car-icon">
-				<a href="#" id="carIconLink"> <img
-					src="${contextPath}/resources/assets/images/car-icon.png" alt="Car Icon" />
-				</a>
-			</div>
-			<h1 class="header-title">회원 정보</h1>
-			<div id="button_menu" class="menu-icon">
-				<img src="${contextPath}/resources/assets/images/List.png" alt="menu icon">
-		</header>
-	</div>
+        <main class="main-content">
+            <div class="info-box">
+                <div class="info-item">${member.getName()}님</div>
+                <div class="info-item">이메일: ${member.getEmail()}</div>
+                <div class="info-item">핸드폰 번호: ${member.getPhone()}</div>
+                <div class="info-item">차량 번호: ${member.getCarnum()}</div>
+                <div class="info-item">적립금: ${member.getMileage()} point</div>
+            </div>
+        </main>
 
-
-
-	<main class="main-content">
-		<div class="info-box">
-			<div class="info-item" >${member.getName()}님</div>
-			<div class="info-item">이메일: ${member.getEmail()}</div>
-			<div class="info-item">핸드폰 번호:${member.getPhone()}</div>
-			<div class="info-item">차량 번호: ${member.getCarnum()}</div>
-			<div class="info-item">적립금: ${member.getMileage()}point</div>
-			<aside>
-				<section class="sidebar">
-					<article class="sidebar_title">
-						<div class="ux-title">
-							<div class="account_name">
-								<img src="${contextPath}/resources/assets/images/Account.png"
-									width="70" height="70">
-								<div>OOO님</div>
-							</div>
-							<div class="sideclose">
-								<button type="button" id="button"
-									class="ux-button icon-only button-menu button-close"
-									tabindex="0">X</button>
-							</div>
-						</div>
-					</article>
-					<article>
-						<div class="main">
-							<div class="menu-list">
-								<ul>
-								  <c:choose>
+        <aside id="rightside" >
+                    <section class="sidebar">
+                        <article class="sidebar_title">
+                            <div class="ux-title">
+                                <div class="account_name">
+                                    <img src = "${contextPath}/resources/assets/images/Account.png" width="70" height="70"> 
+                                    <div>OOO님</div>
+                                </div>
+                            
+                            <div class="sideclose">
+                                <button type="button" class="ux-button icon-only button-menu button-close" tabindex="0">
+                                    X
+                                </button>
+                            </div>
+                        </div>
+                        </article>
+                        <article>
+                    <div class="main">
+                        <div class="menu-list">
+                            <ul>               
+                                <c:choose>
                                 <c:when test="${isLogOn == true  && member!= null}">                                
                                      <li><a href="/pages/user_info.html" class="ux-link">회원 정보</a></li>
                                 <li><a href="/pages/list_reservation.html" class="ux-link">예약 내역 조회</a></li>
@@ -130,27 +130,27 @@ $(function(){
                                 </c:otherwise>
         
                                 </c:choose>
-								</ul>
-							</div>
-					</article>
-				</section>
-			</aside>
-		</div>
-		</div>
+                            </ul>
+                        </div>
+                    </div>
+                </article>
+    </section>
+    
+        </aside>
+    </div>
 
-		<!-- JavaScript -->
-		<script>
-                        document.addEventListener('DOMContentLoaded', function () {
-                            // 메뉴 열기
-                            document.getElementById('button_menu').addEventListener('click', function () {
-                                document.querySelector('aside').classList.add('active');
-                            });
-                
-                            // 메뉴 닫기
-                            document.getElementById('closeMenu').addEventListener('click', function () {
-                                document.querySelector('aside').classList.remove('active');
-                            });
-                        });
-                    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // 메뉴 열기
+            document.getElementById('button_menu').addEventListener('click', function () {
+                document.querySelector('aside').classList.add('active');
+            });
+
+            // 메뉴 닫기
+            document.getElementById('closeMenu').addEventListener('click', function () {
+                document.querySelector('aside').classList.remove('active');
+            });
+        });
+    </script>
 </body>
 </html>
