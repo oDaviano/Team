@@ -28,21 +28,21 @@
 
 	<select id="selectAllMemberList" resultMap="memResult">
       <![CDATA[
-         select * from t_member	order by joinDate desc	 	
+         select * from bs_member	order by joinDate desc	 	
       ]]>
 	</select>
 
 	<insert id="insertMember" parameterType="memberVO">
-		<![CDATA[
-		 insert into t_member(email,pwd, name )
-		 values(#{email #{pwd}, #{name}})
-		]]>
+    <![CDATA[
+        insert into bs_member (email, pwd, name)
+        values (#{email}, #{pwd}, #{name}, #{phone}, #{carnum})
+    ]]>
 	</insert>
 
 
 	<update id="updateMember" parameterType="memberVO">
      <![CDATA[
-	     update t_member
+	     update bs_member
 	     set pwd=#{pwd}, name=#{name}, email=#{email}
 	     where
 	     id=#{id}
