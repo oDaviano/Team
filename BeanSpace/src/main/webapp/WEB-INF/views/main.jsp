@@ -89,8 +89,8 @@ request.setCharacterEncoding("UTF-8");
                             <ul>               
                                 <c:choose>
                                 <c:when test="${isLogOn == true  && member!= null}">                                
-                                     <li><a href="/pages/user_info.html" class="ux-link">회원 정보</a></li>
-                                <li><a href="/pages/list_reservation.html" class="ux-link">예약 내역 조회</a></li>
+                                     <li><a href="${contextPath}/member/user_info.do" class="ux-link">회원 정보</a></li>
+                                <li><a href="${contextPath}/pages/list_reservation.do" class="ux-link">예약 내역 조회</a></li>
                                 <li><a href="/pages/user_info_edit.html" class="ux-link">개인 정보 수정</a></li>
                                              <li><a href="${contextPath}/member/logout.do" class="ux-link">로그아웃</a></li>
                                 </c:when>
@@ -115,7 +115,7 @@ request.setCharacterEncoding("UTF-8");
                 <form class="ui-form search">                           
                  <div class="ui-input">
                   <div class="input outlined">
-                      <input id="search_name" name="search_name" type="text" class="custom-text" placeholder="주소를 검색해보세요">
+                      <input id="search_name" name="search_name" type="text" class="custom-text" placeholder="도시나 주소를 검색해보세요">
                   </div>
                     </div>  
                     <div class="ux-button-bar">
@@ -128,22 +128,23 @@ request.setCharacterEncoding("UTF-8");
 
             <section>
                 <article>
-                        <div id="map"></div>
-                        <div class="popup">
-                    <div id="facname">주차장명</div>
+
+                     <div id="map"></div>
+                     <form class="popup" action ="${contextPath}/reservation/reservation.do" method="post"  >
+                    <div id="facname"  name="sfacname">주차장명</div>
                     <div class="info">
                 <ul >
-                    <li>
-                        <div>주소: </div><div  id="address"></div></li>
-                    <li ><div>요금: </div><div id="fee"></div></li>
+                    <li><div>주소: </div><div  id="address" name="saddress"></div></li>
+                    <li><div>요금: </div><div id="fee"></div></li>
                     <li><div>구분: </div><div id="category"></div></li>
                 </ul>
-            </div>
+          
                 <div class="info_button_area">
-                    <button class="ux-button contained primary" id="button_buy">주차권 구매</button>
-                    <button class="ux-button primary" id="button_cancel">돌아가기</button>
+                    <button class="ux-button contained primary" id="button_buy"> 주차권 구매</a></button>
+                    <div class="ux-button primary" id="button_cancel">돌아가기</div>
                 </div>
             </div>
+            </form>
                 </article>  
            
             </section>

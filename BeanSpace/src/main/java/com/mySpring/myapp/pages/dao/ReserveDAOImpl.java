@@ -8,30 +8,38 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 import com.mySpring.myapp.pages.vo.ReserveVO;
 
-@Repository("ReserveDAO")
+@Repository("reserveDAO")
 public class ReserveDAOImpl implements ReserveDAO{
 
 	@Autowired
 	private SqlSession sqlSession;
-	@Override
-	public List<ReserveVO> selectAllReserves() throws DataAccessException {
-	List<ReserveVO> reservesList = null;
-	reservesList = sqlSession.selectList("mapper.pagees.selectAllReserves");
-		return 	reservesList;
-	}
-	@Override
-	public int insertReserve(ReserveVO reserveVO)throws DataAccessException {
-		return sqlSession.insert("mapper.pages.deleteCampingSite", reserveVO);
-	}
+	/*
+	 * @Override public List<ReserveVO> selectAllReserves() throws
+	 * DataAccessException { List<ReserveVO> reservesList = null; reservesList =
+	 * sqlSession.selectList("mapper.pages.selectAllReserves"); return reservesList;
+	 * }
+	 */
 
 	@Override
 	public int deleteReserve(int rsvnum) {
-		return sqlSession.delete("mapper.pages.deleteCampingSite", rsvnum);
+		return sqlSession.delete("mapper.reserve.deleteReserve", rsvnum);
 	}
 
 	@Override
-	public ReserveVO selectReserveByRsvnum(int rsvnum) {
-		return sqlSession.selectOne("mapper.pages.selectReservesByRsvnum", rsvnum);
+	public List<ReserveVO> selectMemberReserves() {
+		List<ReserveVO> reservesList = null;
+		reservesList = sqlSession.selectList("mapper.reserve.selectMemberReserves");
+		return reservesList;
+	}
+	@Override
+	public int addReserve(ReserveVO reserveVO) {
+		System.out.println("rsvnum values: "+reserveVO.getRsvnum() +", "+reserveVO.getEmail());
+		return sqlSession.insert("mapper.reserve.addReserve", reserveVO);
+	}
+
+	@Override
+	public int checkRsvnum(int rsvnum) {
+		return sqlSession. selectOne("mapper.reserve.checkRsvnum", rsvnum);
 	}
 
 	

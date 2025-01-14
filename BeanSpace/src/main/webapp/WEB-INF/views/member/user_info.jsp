@@ -69,7 +69,9 @@ $(function(){
 		  //window.location.replace('${contextPath}/member/loginForm.do');
 		 console.log(session);
 	   // location.href=loginForm;
-	  }
+		  }
+	  console.log("${member}");
+	  console.log("${member.getName()}");
 });
 </script>
 <body>

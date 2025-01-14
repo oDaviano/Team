@@ -8,11 +8,11 @@
 		<result property="email" column="email" />
 		<result property="pwd" column="pwd" />
 		<result property="name" column="name" />
-			<result property="phone" column="phone" />
+		<result property="phone" column="phone" />
 		<result property="carnum" column="carnum" />
-				<result property="mileage" column="mileage" />
+		<result property="mileage" column="mileage" />
 	</resultMap>
-	<!-- <resultMap id="memResult" type="java.util.HashMap"> <result property="id" 
+<!-- <resultMap id="memResult" type="java.util.HashMap"> <result property="id" 
 		column="id" /> <result property="pwd" column="pwd" /> <result property="name" 
 		column="name" /> <result property="email" column="email" /> <result property="joinDate" 
 		column="joinDate" /> </resultMap> -->

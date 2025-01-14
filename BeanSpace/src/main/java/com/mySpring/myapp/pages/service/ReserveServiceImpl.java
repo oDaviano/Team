@@ -1,5 +1,6 @@
 package com.mySpring.myapp.pages.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,13 +17,19 @@ public class ReserveServiceImpl implements ReserveService {
 	private ReserveDAO reserveDAO;
 	
 	@Override
-	public List<ReserveVO> listReserves() {
-		return reserveDAO.selectAllReserves();
+	public List<ReserveVO> selectMemberReserves() {
+		return reserveDAO.selectMemberReserves();
 	}
 
+	
+//	@Override
+//	public List<ReserveVO> listAllReserves() {
+//		return reserveDAO.selectMeberReserves();
+//	}
+
 	@Override
-	public void addReserve(ReserveVO reserveVO) {
-		reserveDAO.insertReserve(reserveVO);
+	public int addReserve(ReserveVO reserveVO) {
+		return reserveDAO.addReserve(reserveVO);
 		
 	}
 
@@ -31,10 +38,10 @@ public class ReserveServiceImpl implements ReserveService {
 		reserveDAO.deleteReserve(rsvnum);
 		
 	}
-
-	@Override
-	public ReserveVO getReserveByRsvnum(int rsvnum) {
-		return reserveDAO.selectReserveByRsvnum(rsvnum);
+	
+	public int checkRsvnum(int rsvnum) {
+		
+		return reserveDAO.checkRsvnum(rsvnum);
 	}
 	
 }

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.reserve">
+	<resultMap id="ReserveResult" type="reserveVO">
+		<result property="rsvnum" column="rsvnum" />
+		<result property="name" column="name" />
+		<result property="ptime" column="ptime" />
+		<result property="etime" column="etime" />
+		<result property="phone" column="phone" />
+		<result property="carnum" column="carnum" />
+		<result property="fee" column="fee" />
+		<result property="mileage" column="mileage" />
+		<result property="email" column="email" />
+		<result property="address" column="address"/>
+	</resultMap>
+	<!-- <resultMap id="memResult" type="java.util.HashMap"> <result property="id" 
+		column="id" /> <result property="pwd" column="pwd" /> <result property="name" 
+		column="name" /> <result property="email" column="email" /> <result property="joinDate" 
+		column="joinDate" /> </resultMap> -->
+
+<!-- 	<select id="selecReserves" resultType="reserveVO">
+	      <![CDATA[
+  		select * from bs_reservation
+		where email=#{email}
+      ]]>
+	
+	</select> -->
+
+
+	<select id="selectMemberReserves" resultMap="ReserveResult">
+      <![CDATA[
+         select * from bs_reservation
+         where
+         email=#{email}
+         order by ptime desc	 	
+      ]]>
+	</select>
+
+	<insert id="addReserve" parameterType="reserveVO">
+		<![CDATA[
+		 insert into bs_reservation(rsvnum, name, ptime, etime, phone, carnum, fee, mileage ,email,address )
+		 values(#{rsvnum}, #{name}, #{ptime},#{etime}, #{phone}, #{carnum}, #{fee}, #{mileage},#{email},#{address})
+		]]>
+	</insert>
+
+
+	<delete id="deletReserve" parameterType="String">
+	<![CDATA[
+	   delete from  bs_reservation
+	   where
+	   rsvnum=#{rsvnum}
+	]]>
+	</delete>
+	
+	<select id="checkRsvnum" parameterType = "Integer" resultType="Integer">
+	
+	      <![CDATA[
+         select count(*) from bs_reservation
+         where
+         rsvnum=#{rsvnum}	 	
+      ]]>
+	</select>
+
+
+</mapper>

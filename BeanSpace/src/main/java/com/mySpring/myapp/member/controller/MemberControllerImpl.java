@@ -90,10 +90,8 @@ public class MemberControllerImpl   implements MemberController {
 		                       HttpServletRequest request, HttpServletResponse response) throws Exception {
 	ModelAndView mav = new ModelAndView();
 //	System.out.println(member.getEmail()+"/"+member.getPwd()+"/"+member.getName()+"/"+member.getPhone()+"/"+member.getCarnum()+"/"+member.getMileage());
-	
 	memberVO = memberService.login(member);
 	if(memberVO != null) {
-
 	    HttpSession session = request.getSession();
 	    session.setAttribute("member", memberVO);
 	    session.setAttribute("isLogOn", true);
@@ -102,7 +100,7 @@ public class MemberControllerImpl   implements MemberController {
 	    if(action!= null) {	
 	       mav.setViewName("redirect:"+action);
 	    }else{
-	       mav.setViewName("redirect:/member/user_info.do");	
+	       mav.setViewName("redirect:/main.do");	
 	    }
 
 	}else {

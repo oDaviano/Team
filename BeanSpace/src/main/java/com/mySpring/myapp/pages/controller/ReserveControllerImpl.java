@@ -3,6 +3,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,6 +13,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.mySpring.myapp.member.dao.MemberDAO;
+import com.mySpring.myapp.member.vo.MemberVO;
+import com.mySpring.myapp.pages.dao.ReserveDAO;
 import com.mySpring.myapp.pages.service.ReserveService;
 import com.mySpring.myapp.pages.vo.ReserveVO;
 
@@ -21,46 +25,96 @@ public class ReserveControllerImpl implements ReserveController{
 	@Autowired
 	private ReserveService reserveService;
 
+	@Autowired
+	ReserveVO reservVO;
+	@Autowired
+	ReserveDAO reserveDAO;
+	
+//	@Override
+//	@RequestMapping(value = "/pages/list_reservation_detail.do", method = RequestMethod.GET)
+//	public ModelAndView detail(@RequestParam("rsvnum") int rsvnum, HttpServletRequest request,
+//			HttpServletResponse response) throws Exception {
+//		String viewName = (String) request.getAttribute("viewName");
+//		ReserveVO reserveVO = reserveService.getReserveByRsvnum(rsvnum);
+//		if (reserveVO == null) {
+//			throw new Exception("Reservation not found for rsvnum: " + rsvnum);
+//		}
+//		ModelAndView mav = new ModelAndView();
+//		mav.setViewName(viewName);
+//		mav.addObject("reserve", reserveVO);
+//		return mav;
+//	}
+
+//	@Override
+//	@RequestMapping(value = "/pages/list_reservation.do", method = RequestMethod.GET)
+//	public ModelAndView listReserves(HttpServletRequest request, HttpServletResponse response) throws Exception {
+//		String viewName = (String) request.getAttribute("viewName");
+//		List<ReserveVO> reservesList = reserveService.listReserves();
+//		ModelAndView mav = new ModelAndView(viewName);
+//		mav.addObject("reservesList", reservesList);
+//		return mav;
+//	}
+
 	@Override
-	@RequestMapping(value = "/pages/list_reservation_detail.do", method = RequestMethod.GET)
-	public ModelAndView detail(@RequestParam("rsvnum") int rsvnum, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
-		String viewName = (String) request.getAttribute("viewName");
-		ReserveVO reserveVO = reserveService.getReserveByRsvnum(rsvnum);
-		if (reserveVO == null) {
-			throw new Exception("Reservation not found for rsvnum: " + rsvnum);
+	@RequestMapping(value = "/reservation/reservation_confirm.do", method = RequestMethod.POST)
+	public ModelAndView addReserve(@ModelAttribute("reserve") ReserveVO reserve,
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		int result = 0;
+		System.out.println(0);
+		
+		int rand =  (int)(Math.random() * 89999999) + 10000000;
+		System.out.println(rand);
+		int chkrsv = reserveService.checkRsvnum(rand);
+		while(chkrsv>0) {
+			 rand =  (int)(Math.random() * 89999999) + 10000000;
 		}
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName(viewName);
-		mav.addObject("reserve", reserveVO);
+		System.out.println(rand);
+		reserve.setRsvnum(rand);
+		System.out.println("rsvnum: "+reserve.getRsvnum());
+		result = reserveService.addReserve(reserve);
+		String viewName = (String)request.getAttribute("viewName");
+		ModelAndView mav = new ModelAndView(viewName);
+
+		return mav;
+	}
+
+	@Override
+	@RequestMapping(value = "/pages/reservation_cancel.do", method = RequestMethod.GET)
+	public ModelAndView removeReserve(@RequestParam("rsvnum") int rsvnum, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		reserveService.removeReserve(rsvnum);
+		ModelAndView mav = new ModelAndView("redirect:/main.do");
 		return mav;
 	}
 
 	@Override
 	@RequestMapping(value = "/pages/list_reservation.do", method = RequestMethod.GET)
-	public ModelAndView listReserves(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ModelAndView selectMemberReserves(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = (String) request.getAttribute("viewName");
-		List<ReserveVO> reservesList = reserveService.listReserves();
+		List<ReserveVO> reservesList = reserveService.selectMemberReserves();
 		ModelAndView mav = new ModelAndView(viewName);
 		mav.addObject("reservesList", reservesList);
 		return mav;
 	}
 
 	@Override
-	@RequestMapping(value = "/pages/reservation_confirm.do", method = RequestMethod.POST)
-	public ModelAndView addReserve(@ModelAttribute("reserve") ReserveVO reserve,
-			HttpServletRequest request, HttpServletResponse response) throws Exception {
-		reserveService.addReserve(reserve);
-		ModelAndView mav = new ModelAndView("redirect:/pages/list_reservation.do");
-		return mav;
+	@RequestMapping(value = "/reservation/reservation.do", method = RequestMethod.POST)
+	public ModelAndView buy( HttpServletRequest request, HttpServletResponse response) throws Exception {
+		HttpSession session = request.getSession();
+
+		String viewName = (String) request.getAttribute("viewName");
+			ModelAndView mav = new ModelAndView(viewName);
+			return mav;
 	}
 
 	@Override
-	@RequestMapping(value = "/pages/list_reservation_cancel.do", method = RequestMethod.GET)
-	public ModelAndView removeReserve(@RequestParam("rsvnum") int rsvnum, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
-		reserveService.removeReserve(rsvnum);
-		ModelAndView mav = new ModelAndView("redirect:/pages/list_reservation.do");
+	@RequestMapping(value = "/pages/reservecheck.do", method = RequestMethod.POST)
+	public ModelAndView checkRsvnum(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		HttpSession session = request.getSession();
+
+		String viewName = (String) request.getAttribute("viewName");
+		ModelAndView mav = new ModelAndView(viewName);
 		return mav;
 	}
 

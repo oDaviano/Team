@@ -129,6 +129,7 @@ var name = popup.find("#facname");
         var overlayLayer = this.getPanes().overlayLayer;
         this._element.appendTo(overlayLayer);
         this._element.on('click', function(e) {
+		var addr;
           e.stopPropagation(); // 이벤트 전파 차단
       popup.addClass("open")
        name.text(datas[i]["주차장명"]);
@@ -149,10 +150,16 @@ var name = popup.find("#facname");
       category.text(datas[i]["주차장구분"]);     
         
       if(oldsel!=null){
-        $(oldsel).removeClass('selected')
+        $(oldsel).removeClass('selected');
       }
       oldsel = this;
-      $(oldsel).addClass('selected')
+      $(oldsel).addClass('selected');
+            sessionStorage.setItem("basefee", datas[i]["주차기본요금"]);
+      sessionStorage.setItem("basetime", datas[i]["주차기본시간"]);
+      sessionStorage.setItem("utime", datas[i]["추가단위시간"]);
+      sessionStorage.setItem("addfee", datas[i]["추가단위요금"]);
+      sessionStorage.setItem("address", address.text());
+ sessionStorage.setItem("name", name.text());
       });
 
  
