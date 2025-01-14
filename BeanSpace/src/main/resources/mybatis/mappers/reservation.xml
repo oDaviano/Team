@@ -30,7 +30,7 @@
 	</select> -->
 
 
-	<select id="selectMemberReserves" resultMap="ReserveResult">
+	<select id="selectMemberReserves" parameterType = "String" resultMap="ReserveResult">
       <![CDATA[
          select * from bs_reservation
          where
@@ -59,6 +59,15 @@
 	
 	      <![CDATA[
          select count(*) from bs_reservation
+         where
+         rsvnum=#{rsvnum}	 	
+      ]]>
+	</select>
+	
+	<select id="rsvDetail" parameterType = "Integer" resultType="reserveVO">
+	
+	      <![CDATA[
+         select * from bs_reservation
          where
          rsvnum=#{rsvnum}	 	
       ]]>

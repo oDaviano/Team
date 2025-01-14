@@ -82,7 +82,7 @@ $(function () {
 
     <div class="buttons">
       <button type="submit" class="submit-button">구매</button>
-      <button type="button" class="cancel-button">취소</button>
+      <button type="button"  onclick="history.back()" class="cancel-button">취소</button>
     </div>
   </form>
 </div>

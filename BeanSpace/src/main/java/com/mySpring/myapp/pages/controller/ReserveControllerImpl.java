@@ -26,7 +26,7 @@ public class ReserveControllerImpl implements ReserveController{
 	private ReserveService reserveService;
 
 	@Autowired
-	ReserveVO reservVO;
+	ReserveVO reserveVO;
 	@Autowired
 	ReserveDAO reserveDAO;
 	
@@ -69,9 +69,9 @@ public class ReserveControllerImpl implements ReserveController{
 		while(chkrsv>0) {
 			 rand =  (int)(Math.random() * 89999999) + 10000000;
 		}
-		System.out.println(rand);
+
 		reserve.setRsvnum(rand);
-		System.out.println("rsvnum: "+reserve.getRsvnum());
+
 		result = reserveService.addReserve(reserve);
 		String viewName = (String)request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView(viewName);
@@ -90,10 +90,12 @@ public class ReserveControllerImpl implements ReserveController{
 
 	@Override
 	@RequestMapping(value = "/pages/list_reservation.do", method = RequestMethod.GET)
-	public ModelAndView selectMemberReserves(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ModelAndView selectMemberReserves(@RequestParam("email") String email, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = (String) request.getAttribute("viewName");
-		List<ReserveVO> reservesList = reserveService.selectMemberReserves();
+		
+		List<ReserveVO> reservesList = reserveService.selectMemberReserves(email);
 		ModelAndView mav = new ModelAndView(viewName);
+		System.out.println("Length: "+reservesList.size());
 		mav.addObject("reservesList", reservesList);
 		return mav;
 	}
@@ -115,6 +117,19 @@ public class ReserveControllerImpl implements ReserveController{
 
 		String viewName = (String) request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView(viewName);
+		return mav;
+	}
+
+	@Override
+	@RequestMapping(value = "/reservation/reservation_detail.do", method = RequestMethod.GET)
+	public ModelAndView viewRsvDetail(@ModelAttribute("rsvnum") int rsvnum, HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		request.setCharacterEncoding("utf-8");
+		
+		String viewName = (String)request.getAttribute("viewName");
+		reserveVO = reserveService.viewDetail(rsvnum);
+		ModelAndView mav = new ModelAndView(viewName);
+		mav.addObject("reserve",reserveVO);
 		return mav;
 	}
 

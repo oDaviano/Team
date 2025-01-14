@@ -17,8 +17,8 @@ public class ReserveServiceImpl implements ReserveService {
 	private ReserveDAO reserveDAO;
 	
 	@Override
-	public List<ReserveVO> selectMemberReserves() {
-		return reserveDAO.selectMemberReserves();
+	public List<ReserveVO> selectMemberReserves(String email) {
+		return reserveDAO.selectMemberReserves(email);
 	}
 
 	
@@ -39,9 +39,15 @@ public class ReserveServiceImpl implements ReserveService {
 		
 	}
 	
+	@Override
 	public int checkRsvnum(int rsvnum) {
-		
 		return reserveDAO.checkRsvnum(rsvnum);
+	}
+
+
+	@Override
+	public ReserveVO viewDetail(int rsvnum) {
+		return reserveDAO.viewDetail(rsvnum);
 	}
 	
 }

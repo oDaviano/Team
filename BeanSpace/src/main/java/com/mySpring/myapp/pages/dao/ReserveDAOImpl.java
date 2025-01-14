@@ -26,10 +26,10 @@ public class ReserveDAOImpl implements ReserveDAO{
 	}
 
 	@Override
-	public List<ReserveVO> selectMemberReserves() {
-		List<ReserveVO> reservesList = null;
-		reservesList = sqlSession.selectList("mapper.reserve.selectMemberReserves");
-		return reservesList;
+	public List<ReserveVO> selectMemberReserves(String email) {
+//		List<ReserveVO> reservesList = null;
+//		reservesList = sqlSession.selectList("mapper.reserve.selectMemberReserves", email);
+		return sqlSession.selectList("mapper.reserve.selectMemberReserves", email);
 	}
 	@Override
 	public int addReserve(ReserveVO reserveVO) {
@@ -37,9 +37,15 @@ public class ReserveDAOImpl implements ReserveDAO{
 		return sqlSession.insert("mapper.reserve.addReserve", reserveVO);
 	}
 
+
 	@Override
 	public int checkRsvnum(int rsvnum) {
 		return sqlSession. selectOne("mapper.reserve.checkRsvnum", rsvnum);
+	}
+
+	@Override
+	public ReserveVO viewDetail(int rsvnum) {
+		return sqlSession. selectOne("mapper.reserve.rsvDetail", rsvnum);
 	}
 
 	

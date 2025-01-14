@@ -90,7 +90,7 @@ request.setCharacterEncoding("UTF-8");
                                 <c:choose>
                                 <c:when test="${isLogOn == true  && member!= null}">                                
                                      <li><a href="${contextPath}/member/user_info.do" class="ux-link">회원 정보</a></li>
-                                <li><a href="${contextPath}/pages/list_reservation.do" class="ux-link">예약 내역 조회</a></li>
+                                <li><a href="${contextPath}/pages/list_reservation.do?email=${member.getEmail()}" class="ux-link">예약 내역 조회</a></li>
                                 <li><a href="/pages/user_info_edit.html" class="ux-link">개인 정보 수정</a></li>
                                              <li><a href="${contextPath}/member/logout.do" class="ux-link">로그아웃</a></li>
                                 </c:when>

@@ -34,7 +34,6 @@ request.setCharacterEncoding("UTF-8");
   <link type="text/css" rel="stylesheet" href="${contextPath}/resources/assets/css/font.css">
   <link type="text/css" rel="stylesheet" href="${contextPath}/resources/assets/css/tmp_peg.css">
   <link type="text/css" rel="stylesheet" href="${contextPath}/resources/assets/css/tmp_njw.css">
-   <link type="text/css" rel="stylesheet" href="${contextPath}/resources/assets/css/tmp_common.css">
   <link type="text/css" rel="stylesheet" href="${contextPath}/resources/lib/jquery-ui-1.12.1.min.css">
   <link type="text/css" rel="stylesheet" href="${contextPath}/resources/lib/jquery-ui-1.12.1.theme.min.css">
   <link type="text/css" rel="stylesheet" href="${contextPath}/resources/lib/swiper-bundle.min.css">
@@ -43,12 +42,10 @@ request.setCharacterEncoding("UTF-8");
   <script type="text/javascript" src="${contextPath}/resources/lib/jquery-ui-1.12.1.min.js"></script>
   <script type="text/javascript" src="${contextPath}/resources/lib/swiper-bundle.min.js"></script>
  
-  <script type="text/javascript" src="js/common.js"></script>
+  <script type="text/javascript" src="${contextPath}/resources/js/common.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=8ze2pCtEXZEBra8ProWgd2QGH69Ew8A4G6U6B6NC"></script>
 </head>
-
-
 <body>
     <div class="container">
        
@@ -65,7 +62,7 @@ request.setCharacterEncoding("UTF-8");
     </div>
 </div>
 
-            <body>
+
                 <div class="container">
                    
             
@@ -95,45 +92,26 @@ request.setCharacterEncoding("UTF-8");
 							</tr>
 						</c:when>
 						<c:when test="${not empty reservesList}">
-							<c:forEach var="article" items="${reservesList }"
-								varStatus="articleNum">
-								<tr align="center">
-									<td width="5%">${article.articleNO}</td>
-									<td width="10%">${article.id }</td>
-									<td align='left' width="35%"><span
-										style="padding-right: 30px"></span> <c:choose>
-											<c:when test='${article.level > 1 }'>
-												<c:forEach begin="1" end="${article.level }" step="1">
-													<span style="padding-left: 20px"></span>
-												</c:forEach>
-												<span style="font-size: 12px;">[답변]</span>
-												<a class='cls1'
-													href="${contextPath}/board/viewArticle.do?articleNO=${article.articleNO}">${article.title}</a>
-											</c:when>
-											<c:otherwise>
-												<a class='cls1'
-													href="${contextPath}/board/viewArticle.do?articleNO=${article.articleNO}">${article.title }</a>
-											</c:otherwise>
-										</c:choose></td>
-									<td width="10%">${article.writeDate}</td>
-								</tr>
+							<c:forEach var="reserve" items="${reservesList }">
+							
+							     <tr>
+                                <td><a href="${contextPath}/reservation/reservation_detail.do?rsvnum=${reserve.rsvnum}" class="facility-link">${reserve.name}</a></td>
+                                <td>${reserve.ptime}</td>
+                                <td>${reserve.ptime}</td>
+                                <td>${reserve.etime}</td>
+                            </tr>
+				
 							</c:forEach>
 						</c:when>
 					</c:choose>
                         
-                        
-                        
-                        
-                        
-                            <!-- 데이터 예시 -->
-                            
-                            
+					<!-- 데이터 예시
                             <tr>
                                 <td><a href="/pages/confirm_reservation.html" class="facility-link">서울타워 주차장</a></td>
                                 <td>2024-12-23</td>
                                 <td>14:00</td>
                                 <td>16:00</td>
-                            </tr>
+                            </tr> -->
                             <!-- 데이터가 없을 경우 -->
                             <!-- <tr>
                                 <td colspan="4" class="no-data">예약 내역이 없습니다.</td>
