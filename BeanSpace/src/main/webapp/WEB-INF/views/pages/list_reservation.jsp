@@ -67,9 +67,10 @@ request.setCharacterEncoding("UTF-8");
                    
             
                     <!-- 검색 입력 필드 추가 -->
-                    <input type="text" id="searchInput" placeholder="🔍 시설명 또는 예약 날짜 검색..." class="search-input">
-                     
-        <input type="datetime-local" id="datetimeFilter" class="datetime-input" placeholder="날짜 및 시간 선택">
+                    <input type="text" id="searchInput" placeholder="🔍 시설명 검색..." class="search-input">
+                                   
+        <input type="date" id="datetimeFilter" class="datetime-input" placeholder="날짜 및 시간 선택">    
+<!--         <input type="datetime-local" id="datetimeFilter" class="datetime-input" placeholder="날짜 및 시간 선택"> -->
             
                     <table>
                         <thead>
@@ -164,16 +165,16 @@ request.setCharacterEncoding("UTF-8");
     </div>
 
     <script>
-    // 검색 기능
-    document.getElementById('searchInput').addEventListener('input', function() {
+     // 검색 기능
+     document.getElementById('searchInput').addEventListener('input', function() {
         const query = this.value.toLowerCase();
         const rows = document.querySelectorAll('#reservationTable tr');
 
         rows.forEach(row => {
             const facilityName = row.cells[0].textContent.toLowerCase();
-            const reservationDate = row.cells[1].textContent.toLowerCase();
+       //     const reservationDate = row.cells[1].textContent.toLowerCase();
 
-            if (facilityName.includes(query) || reservationDate.includes(query)) {
+            if (facilityName.includes(query) ){//}|| reservationDate.includes(query)) {
                 row.style.display = '';
             } else {
                 row.style.display = 'none';
@@ -210,7 +211,7 @@ request.setCharacterEncoding("UTF-8");
         document.getElementById('closeMenu').addEventListener('click', function () {
             document.querySelector('aside').classList.remove('active');
         });
-    });
+    }); 
     </script>
 </body>
 </html>

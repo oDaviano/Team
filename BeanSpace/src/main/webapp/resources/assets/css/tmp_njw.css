@@ -143,6 +143,11 @@ td a:hover {
     padding: 20px;
 }
 
+
+#datetimeFilter{
+	margin-bottom:16px;
+}
+
 /* 검색 입력 스타일 */
 .search-input {
     width: 90%;
