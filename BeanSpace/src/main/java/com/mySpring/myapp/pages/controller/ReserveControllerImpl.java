@@ -133,5 +133,15 @@ public class ReserveControllerImpl implements ReserveController{
 		return mav;
 	}
 
+	@Override
+	@RequestMapping(value = "/pages/non_member_authentication.do", method = RequestMethod.GET)
+	public ModelAndView nonmemberAuth(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		String viewName = (String)request.getAttribute("viewName");	
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName(viewName);
+		return mav;
+	}
+
 
 }

@@ -20,4 +20,5 @@ public interface ReserveController {
 	ModelAndView selectMemberReserves(String email, HttpServletRequest request, HttpServletResponse response) throws Exception;
 	ModelAndView checkRsvnum(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	ModelAndView viewRsvDetail(int rsvnum, HttpServletRequest request, HttpServletResponse response) throws Exception;
+	ModelAndView nonmemberAuth( HttpServletRequest request, HttpServletResponse response) throws Exception;
 }

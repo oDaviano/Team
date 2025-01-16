@@ -23,7 +23,7 @@ request.setCharacterEncoding("UTF-8");
 <meta name="content" content="">
 <meta name="keywords" content="">
 <meta name="description" content="빈자리 description">
-<title>예약 완료</title>
+<title>예약 세부 정보</title>
 
 
 <link type="text/css" rel="stylesheet" href="${contextPath}/resources/assets/css/font.css">
@@ -46,8 +46,8 @@ request.setCharacterEncoding("UTF-8");
 <body>
 <div class="container">
   <div class="header">
-    <h2>예약이 완료되었습니다.</h2>
-    <p>해당 내역은 예약 목록에서도 확인할 수 있습니다.</p>
+    <h2>예약 내역.</h2>
+
   </div>
 
   <div class="content">

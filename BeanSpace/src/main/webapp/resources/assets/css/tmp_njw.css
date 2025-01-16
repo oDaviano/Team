@@ -26,7 +26,7 @@ header{
 .car-icon img {
     width: 80px; /* 이미지 크기 */
     height: auto; /* 비율 유지 */
-    margin-left: 13px; /* 좌측 여백 */
+    /*margin-left: 13px;  좌측 여백 */
     cursor: pointer; /* 마우스를 올리면 포인터 표시 */
 }
 
@@ -40,9 +40,9 @@ header{
 }
 
 .header-title2 {
-    position: absolute;
+   /*position: absolute;
     left: 53%;
-    transform: translateX(-50%);
+    transform: translateX(-50%);*/
     font-size: 25px;
     font-weight: bold;
     margin: 0;

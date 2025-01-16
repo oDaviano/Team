@@ -96,7 +96,7 @@ request.setCharacterEncoding("UTF-8");
                                 </c:when>
                                 <c:otherwise>
                                      <li><a  href="${contextPath}/member/loginForm.do"class="ux-link button-mob-sign in">로그인</a></li>
-                                     <li><a href="/pages/list_reservation.html" class="ux-link">예약 내역 조회</a></li>
+                                     <li><a href="${contextPath}/pages/non_member_authentication.do" class="ux-link">예약 내역 조회</a></li>
                                 
                                 </c:otherwise>
         

@@ -37,7 +37,7 @@ request.setCharacterEncoding("UTF-8");
 <script type="text/javascript" src="${contextPath}/resources/lib/swiper-bundle.min.js"></script>
 
 <!-- <script type="text/javascript" src="/js/temp_peg.js"></script> -->
-<script type="text/javascript" src="${contextPath}/js/common.js"></script>
+  <script type="text/javascript" src="${contextPath}/resources/js/common.js"></script>
 </head>
 <script>
 
