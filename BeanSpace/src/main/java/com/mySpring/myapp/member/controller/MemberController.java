@@ -1,5 +1,7 @@
 package com.mySpring.myapp.member.controller;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -20,4 +22,6 @@ public interface MemberController {
                               HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public ModelAndView logout(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public ModelAndView myInfo(HttpServletRequest request, HttpServletResponse response)throws Exception;
+	public ModelAndView confirmEmail(@RequestParam("email") String email);
+
 }

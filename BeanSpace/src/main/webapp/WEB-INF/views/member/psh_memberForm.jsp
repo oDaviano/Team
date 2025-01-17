@@ -61,8 +61,9 @@ request.setCharacterEncoding("UTF-8");
 
                 <!-- 이메일 입력과 중복확인 -->
                 <div class="form-group">
-                    <input type="email" placeholder="이메일 입력" name="email" required>
-                    <button type="button" class="btn duplicate-check-btn">중복확인</button>
+                    <input type="email" id="email" placeholder="이메일 입력" name="email" autofocus>
+                    <label id="label1"></label>
+                    <!-- <button type="button" class="btn duplicate-check-btn">중복확인</button> -->
                 </div>
                 <!-- 비밀번호 입력 확인 -->
                 <div class="form-group">
@@ -103,6 +104,7 @@ request.setCharacterEncoding("UTF-8");
             const confirmPassword = document.getElementById('confirm_password');
             const passwordError = document.getElementById('password-error');
             const signupBtn = document.getElementById('signup-btn');
+            const contextPath = "${contextPath}";
     
             function validatePassword() {
                 if (confirmPassword.value === "") {
@@ -122,6 +124,52 @@ request.setCharacterEncoding("UTF-8");
             // 실시간으로 비밀번호와 확인 필드의 값을 확인하기 위한 이벤트 리스너 추가
             password.addEventListener('input', validatePassword);
             confirmPassword.addEventListener('input', validatePassword);
+            
+            
+            $(document).ready(function () {
+                // 이메일 중복 확인
+                $("#email").on("focusout", function () {
+                    var email = $("#email").val();
+
+                    // 공백이나 빈 문자열인지 확인
+                    if (email === '' || email.length === 0) {
+                        // 공백인 경우 메시지를 표시하고 Ajax 요청을 중단
+                        $("#Label1").css("color", "red").text("공백은 이메일로 사용할 수 없습니다.");
+                        return false; // 요청 중단
+                    }
+
+                    // Ajax를 통해 서버에 이메일 중복 확인 요청
+                    $.ajax({
+                    	url: '${contextPath}/member/confirmEmail.do', // 서버의 컨트롤러 URL 경로
+                        data: {
+                            email: email // 클라이언트에서 서버로 전달할 데이터 (이메일)
+                        },
+                        type: 'POST', // POST 방식으로 요청
+                        dataType: 'json', // 서버 응답을 JSON 형식으로 처리
+
+                        // 서버 요청 성공 시 실행
+                        success: function (response) {
+                            // response.isAvailable 값 확인
+                            if (response.isAvailable === true) {
+                                // 사용 가능한 이메일인 경우
+                                $("#label1").css("color", "green").text("사용 가능한 이메일입니다.");
+                            } else {
+                                // 사용 불가능한 이메일인 경우
+                                $("#label1").css("color", "red").text("사용 불가능한 이메일입니다.");
+                                $("#email").val(''); // 입력 필드 초기화
+                            }
+                        },
+
+                        // 서버 요청 실패 시 실행
+                        error: function () {
+                            // 오류 메시지를 표시
+                            $("#label1").css("color", "red").text("오류가 발생했습니다. 다시 시도해주세요.");
+                        }
+                    }); // End Ajax
+                });
+            });
+
+       
         </script>
     </div>
 </body>

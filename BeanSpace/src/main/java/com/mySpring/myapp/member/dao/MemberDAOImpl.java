@@ -46,5 +46,9 @@ public class MemberDAOImpl implements MemberDAO {
 //			System.out.println(vo.getEmail()+"/"+vo.getPwd()+"/"+vo.getName()+"/"+vo.getPhone()+"/"+vo.getCarnum()+"/"+vo.getMileage());
 		return vo;
 	}
-
+	
+	@Override
+    public int checkEmail(String email) throws DataAccessException {
+        return sqlSession.selectOne("mapper.member.checkEmail", email);
+    }
 }

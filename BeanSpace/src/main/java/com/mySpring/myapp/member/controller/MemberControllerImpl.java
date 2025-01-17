@@ -1,7 +1,9 @@
 package com.mySpring.myapp.member.controller;
 
 import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -190,6 +193,29 @@ public class MemberControllerImpl   implements MemberController {
 			viewName = viewName.substring(viewName.lastIndexOf("/", 1), viewName.length());
 		}
 		return viewName;
+	}
+	
+//	@Override
+//	@RequestMapping(value = "/member/confirmEmail.do", method = RequestMethod.POST)
+//	public ModelAndView confirmEmail(@RequestParam("email") String email) {
+//	    System.out.println("confirmEmail 호출됨: " + email);
+//	    boolean isAvailable = memberService.isEmailAvailable(email);
+//	    ModelAndView mav = new ModelAndView("jsonView");
+//	    mav.addObject("isAvailable", isAvailable);
+//	    return mav;
+//	}
+
+	@Override
+	@RequestMapping(value = "/member/confirmEmail.do", method = RequestMethod.POST)
+	public ModelAndView confirmEmail(@RequestParam("email") String email) {
+	    System.out.println("confirmEmail 호출됨: " + email);
+	    boolean isAvailable = memberService.isEmailAvailable(email);
+
+	    // View 이름을 명시하지 않고 데이터를 직접 전달
+	    ModelAndView mav = new ModelAndView();
+	    mav.setViewName("psh_memberForm"); // JSP 파일 이름
+	    mav.addObject("isAvailable", isAvailable);
+	    return mav;
 	}
 
 
