@@ -138,7 +138,7 @@ public class MemberControllerImpl   implements MemberController {
 		Enumeration<String> attributeNames = session.getAttributeNames();
         StringBuilder sessionData = new StringBuilder("세션 데이터 목록:<br>");
 
-        // 각 속성의 이름과 값을 출력
+          // 각 속성의 이름과 값을 출력
         while (attributeNames.hasMoreElements()) {
             String attributeName = attributeNames.nextElement();
             Object attributeValue = session.getAttribute(attributeName);
@@ -207,15 +207,15 @@ public class MemberControllerImpl   implements MemberController {
 
 	@Override
 	@RequestMapping(value = "/member/confirmEmail.do", method = RequestMethod.POST)
-	public ModelAndView confirmEmail(@RequestParam("email") String email) {
+	@ResponseBody
+	public boolean confirmEmail(@RequestParam("email") String email) {
 	    System.out.println("confirmEmail 호출됨: " + email);
 	    boolean isAvailable = memberService.isEmailAvailable(email);
+    // View 이름을 명시하지 않고 데이터를 직접 전달
+	    System.out.println(isAvailable);
 
-	    // View 이름을 명시하지 않고 데이터를 직접 전달
-	    ModelAndView mav = new ModelAndView();
-	    mav.setViewName("psh_memberForm"); // JSP 파일 이름
-	    mav.addObject("isAvailable", isAvailable);
-	    return mav;
+	   // mav.addObject("isAvailable", isAvailable);
+	    return isAvailable;
 	}
 
 

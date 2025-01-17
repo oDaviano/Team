@@ -41,12 +41,12 @@ request.setCharacterEncoding("UTF-8");
   <script type="text/javascript" src="${contextPath}/resources/lib/jquery-ui-1.12.1.min.js"></script>
   <script type="text/javascript" src="${contextPath}/resources/lib/swiper-bundle.min.js"></script>
 
-  <script type="text/javascript" src="${contextPath}/resources/js/temp_peg.js"></script>
-  <script type="text/javascript" src="${contextPath}/resources/js/common.js"></script>
+<%--   <script type="text/javascript" src="${contextPath}/resources/js/temp_peg.js"></script> --%>
+<%--   <script type="text/javascript" src="${contextPath}/resources/js/common.js"></script> --%>
 
-  <script type="text/javascript" src="js/common.js"></script>
+  <script type="text/javascript" src="${contextPath}/resources/js/common.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=8ze2pCtEXZEBra8ProWgd2QGH69Ew8A4G6U6B6NC"></script>
+
 </head>
 
 
@@ -63,7 +63,7 @@ request.setCharacterEncoding("UTF-8");
                 <div class="form-group">
                     <input type="email" id="email" placeholder="이메일 입력" name="email" autofocus>
                     <label id="label1"></label>
-                    <!-- <button type="button" class="btn duplicate-check-btn">중복확인</button> -->
+                    <button type="button" class="btn duplicate-check-btn">중복확인</button>
                 </div>
                 <!-- 비밀번호 입력 확인 -->
                 <div class="form-group">
@@ -105,6 +105,7 @@ request.setCharacterEncoding("UTF-8");
             const passwordError = document.getElementById('password-error');
             const signupBtn = document.getElementById('signup-btn');
             const contextPath = "${contextPath}";
+            const canSignUp = false;
     
             function validatePassword() {
                 if (confirmPassword.value === "") {
@@ -128,9 +129,9 @@ request.setCharacterEncoding("UTF-8");
             
             $(document).ready(function () {
                 // 이메일 중복 확인
-                $("#email").on("focusout", function () {
+                $(".duplicate-check-btn").on("click", function () {  
                     var email = $("#email").val();
-
+console.log(email);
                     // 공백이나 빈 문자열인지 확인
                     if (email === '' || email.length === 0) {
                         // 공백인 경우 메시지를 표시하고 Ajax 요청을 중단
@@ -138,21 +139,24 @@ request.setCharacterEncoding("UTF-8");
                         return false; // 요청 중단
                     }
 
+                    var cfurl = "${contextPath}/member/confirmEmail.do";
                     // Ajax를 통해 서버에 이메일 중복 확인 요청
                     $.ajax({
-                    	url: '${contextPath}/member/confirmEmail.do', // 서버의 컨트롤러 URL 경로
+                    	url: cfurl, // 서버의 컨트롤러 URL 경로
                         data: {
                             email: email // 클라이언트에서 서버로 전달할 데이터 (이메일)
                         },
                         type: 'POST', // POST 방식으로 요청
-                        dataType: 'json', // 서버 응답을 JSON 형식으로 처리
+                       // dataType: 'json', // 서버 응답을 JSON 형식으로 처리
 
                         // 서버 요청 성공 시 실행
+                
                         success: function (response) {
                             // response.isAvailable 값 확인
                             if (response.isAvailable === true) {
                                 // 사용 가능한 이메일인 경우
                                 $("#label1").css("color", "green").text("사용 가능한 이메일입니다.");
+                      
                             } else {
                                 // 사용 불가능한 이메일인 경우
                                 $("#label1").css("color", "red").text("사용 불가능한 이메일입니다.");
