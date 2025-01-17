@@ -58,8 +58,11 @@ request.setCharacterEncoding("UTF-8");
     <div id = "etime" class="info"><strong>출차 시간:</strong>${reserve.getEtime()}</div>
     <div id = "carnum" class="info"><strong>차량 번호:</strong> ${reserve.getCarnum()}</div>
     <div id = "phone" class="info"><strong>전화번호:</strong>${reserve.getPhone()}</div>
+
     <div id = "fee" class="info"><strong>결제 금액:</strong> ${reserve.getFee()}</div>
-    <div id = "mileage" class="info red">${reserve.getMileage()}</div>
+        <c:choose>
+   <c:when test="${isLogOn == true}"> 
+    <div id = "mileage" class="info red">${reserve.getMileage()}</div></c:when></c:choose>
   </div>
 
   <div class="icon">

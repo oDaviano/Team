@@ -7,6 +7,6 @@ public interface ReserveService {
     int addReserve(ReserveVO reserveVO);
     void removeReserve(int rsvnum);
   List<ReserveVO> selectMemberReserves(String email);
-  public int checkRsvnum(int rsvnum);
+  public int checkRsvnum();
   public ReserveVO viewDetail(int rsvnum);
 }

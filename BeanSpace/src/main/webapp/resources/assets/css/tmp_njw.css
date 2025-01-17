@@ -169,30 +169,31 @@ td a:hover {
 }
 
 aside {
-    display: none;
+   /* display: none;
     background-color: white;
-    position: fixed; /* 화면에 고정 */
-    top: 0;
-    right: 0; /* 기본 위치를 화면 안으로 변경 */
-    width: 100%; /* 화면 전체 너비 */
-    height: 100%; /* 화면 전체 높이 */
-    z-index: 1000; /* 다른 요소 위에 표시 */
-    box-shadow: -4px 0 8px rgba(0, 0, 0, 0.2);
-    overflow-y: auto; /* 스크롤 가능 */
-    transition: transform 0.3s ease-in-out; /* 애니메이션 추가 */
+    position: fixed;  화면에 고정 */
+   /*  top: 0;
+    right: 0; 기본 위치를 화면 안으로 변경 */
+   /*   width: 100%;화면 전체 너비 */
+  /*  height: 100%;  화면 전체 높이 */
+ /*   z-index: 1000;  다른 요소 위에 표시 */
+  /*  box-shadow: -4px 0 8px rgba(0, 0, 0, 0.2);
+     overflow-y: auto; 스크롤 가능 */
+  /*  transition: transform 0.3s ease-in-out;  애니메이션 추가 */
 }
 
 /* 사이드바 활성화 시 */
+
 aside.active {
-    display: block;
-    transform: translateX(0); /* 화면 안으로 완전히 표시 */
+ /*    display: block;
+   transform: translateX(0);  화면 안으로 완전히 표시 */
 }
 
 /* 사이드바 내부 콘텐츠 */
 aside .sidebar {
     display: flex;
     flex-direction: column;
-    padding: 15px;
+  /*  padding: 15px;*/
 }
 
 /* 상단 제목 섹션 */

@@ -104,7 +104,16 @@ $(function(){
                             <div class="ux-title">
                                 <div class="account_name">
                                     <img src = "${contextPath}/resources/assets/images/Account.png" width="70" height="70"> 
-                                    <div>OOO님</div>
+                                                                <c:choose>
+                                <c:when test="${isLogOn == true  && member!= null}">                                
+                                     <div>${member.name} 님</div>
+                                </c:when>
+                                <c:otherwise>
+                                    <div>로그인이 필요합니다.</div>
+                                
+                                </c:otherwise>
+        
+                                </c:choose>
                                 </div>
                             
                             <div class="sideclose">
@@ -120,10 +129,10 @@ $(function(){
                             <ul>               
                                 <c:choose>
                                 <c:when test="${isLogOn == true  && member!= null}">                                
-                                     <li><a href="/pages/user_info.html" class="ux-link">회원 정보</a></li>
-                                <li><a href="/pages/list_reservation.html" class="ux-link">예약 내역 조회</a></li>
+                       			<li><a href="${contextPath}/member/user_info.do" class="ux-link">회원 정보</a></li>
+                                <li><a href="${contextPath}/pages/list_reservation.do?email=${member.getEmail()}" class="ux-link">예약 내역 조회</a></li>
                                 <li><a href="/pages/user_info_edit.html" class="ux-link">개인 정보 수정</a></li>
-                                             <li><a href="${contextPath}/member/logout.do" class="ux-link">로그아웃</a></li>
+                                <li><a href="${contextPath}/member/logout.do" class="ux-link">로그아웃</a></li>
                                 </c:when>
                                 <c:otherwise>
                                      <li><a  href="${contextPath}/member/loginForm.do"class="ux-link button-mob-sign in">로그인</a></li>

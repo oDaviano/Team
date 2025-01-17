@@ -27,7 +27,7 @@ var notContain = /[~@#$%";',&*()+|</>=>`?:{[}]/g;
 	$("#haddress").val(address); 
 
 //	$("#hfee").val(basefee + ((utime * 5 - basetime) * addfee));
-	//$("#hmileage").val((basefee + (utime * 5 - basetime) * addfee)*0.02);
+	//$("#hmileage").val( Math.round((basefee + (utime * 5 - basetime) * addfee)*0.02));
 
 	$("#hname").val(name);
 	$("#rsvnum").val(dummy);
@@ -116,7 +116,7 @@ $("#feeText").text("결제 금액: " + total+ "원");
  $("#hfee").val(total);
   console.log($("#hemail").val());
  if($("#hemail").val()!=null &&  $("hemail").val()!=""){
- mileageVal = total*0.02;
+ mileageVal = Math.floor(total*0.02);
   $("#mileageText").text("+"+  mileageVal + "p");
 	$("#hmileage").val( mileageVal );
 	}

@@ -60,17 +60,9 @@ public class ReserveControllerImpl implements ReserveController{
 	public ModelAndView addReserve(@ModelAttribute("reserve") ReserveVO reserve,
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
-		int result = 0;
-		System.out.println(0);
-		
-		int rand =  (int)(Math.random() * 89999999) + 10000000;
-		System.out.println(rand);
-		int chkrsv = reserveService.checkRsvnum(rand);
-		while(chkrsv>0) {
-			 rand =  (int)(Math.random() * 89999999) + 10000000;
-		}
-
-		reserve.setRsvnum(rand);
+		int result = 0;	
+		int chkrsv = reserveService.checkRsvnum();
+		reserve.setRsvnum(++chkrsv);
 
 		result = reserveService.addReserve(reserve);
 		String viewName = (String)request.getAttribute("viewName");

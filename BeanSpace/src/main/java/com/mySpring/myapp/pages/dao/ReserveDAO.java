@@ -5,6 +5,6 @@ public interface ReserveDAO {
 	List<ReserveVO> selectMemberReserves(String email);
 	int addReserve(ReserveVO reserveVO);
 	int deleteReserve(int rsvnum);
-	int checkRsvnum(int rsvnum);
+	int checkRsvnum();
 	ReserveVO viewDetail (int rsvnum);
 }

@@ -40,8 +40,8 @@ public class ReserveServiceImpl implements ReserveService {
 	}
 	
 	@Override
-	public int checkRsvnum(int rsvnum) {
-		return reserveDAO.checkRsvnum(rsvnum);
+	public int checkRsvnum() {
+		return reserveDAO.checkRsvnum();
 	}
 
 

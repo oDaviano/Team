@@ -39,8 +39,8 @@ public class ReserveDAOImpl implements ReserveDAO{
 
 
 	@Override
-	public int checkRsvnum(int rsvnum) {
-		return sqlSession. selectOne("mapper.reserve.checkRsvnum", rsvnum);
+	public int checkRsvnum() {
+		return sqlSession. selectOne("mapper.reserve.checkRsvnum");
 	}
 
 	@Override

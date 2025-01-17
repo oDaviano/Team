@@ -55,12 +55,10 @@
 	]]>
 	</delete>
 	
-	<select id="checkRsvnum" parameterType = "Integer" resultType="Integer">
+	<select id="checkRsvnum"  resultType="Integer">
 	
 	      <![CDATA[
-         select count(*) from bs_reservation
-         where
-         rsvnum=#{rsvnum}	 	
+         select count(*) from bs_reservation	 	
       ]]>
 	</select>
 	

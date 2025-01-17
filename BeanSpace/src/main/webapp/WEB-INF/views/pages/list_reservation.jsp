@@ -32,8 +32,9 @@ request.setCharacterEncoding("UTF-8");
   <!-- <link type="image/png" rel="shortcut icon" href=""> -->
 
   <link type="text/css" rel="stylesheet" href="${contextPath}/resources/assets/css/font.css">
-  <link type="text/css" rel="stylesheet" href="${contextPath}/resources/assets/css/tmp_peg.css">
+    <link type="text/css" rel="stylesheet" href="${contextPath}/resources/assets/css/common	.css">
   <link type="text/css" rel="stylesheet" href="${contextPath}/resources/assets/css/tmp_njw.css">
+  <link type="text/css" rel="stylesheet" href="${contextPath}/resources/assets/css/tmp_peg.css">
   <link type="text/css" rel="stylesheet" href="${contextPath}/resources/lib/jquery-ui-1.12.1.min.css">
   <link type="text/css" rel="stylesheet" href="${contextPath}/resources/lib/jquery-ui-1.12.1.theme.min.css">
   <link type="text/css" rel="stylesheet" href="${contextPath}/resources/lib/swiper-bundle.min.css">
@@ -47,7 +48,7 @@ request.setCharacterEncoding("UTF-8");
   <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=8ze2pCtEXZEBra8ProWgd2QGH69Ew8A4G6U6B6NC"></script>
 </head>
 <body>
-    <div class="container">
+<%--     <div class="container">
        
         <header class="header">
             <div class="car-icon">
@@ -57,15 +58,33 @@ request.setCharacterEncoding("UTF-8");
             </div>
             <h1 class="header-title2">예약 내역 조회</h1>
             <div id="button_menu" class="menu-icon">         
-                <img src = "${contextPath}/resources//assets/images/List.png" alt="menu icon"> 
+                <img src = "${contextPath}/resources//assets/images/List.png" alt="menu icon">  </div>
         </header>
-    </div>
+   
 </div>
+ --%>                     <header>
+                <!-- <div class="observer-layout"></div> -->
+                <!-- <section class="header-pc1 load">.load: setCommon 함수로 AJAX 로드</section> -->
+                <!-- <section class="header-mob load">.load: setCommon 함수로 AJAX 로드</section> -->
 
+            <section class="title_header" >
+                <article class="main_header">
+                    <div id="header_bg">
+            <div id="logo">          
+                <img src = "${contextPath}/resources/assets/images/car-icon.png" width="100" height="90"> </div>            
+            <div id="button_menu" class="button-menu open-menu">         
+                <img src = "${contextPath}/resources/assets/images/List.png" width="70" height="70"> 
+           </div>
+            </div>
+                </article>
+
+        </section>
+
+		</header>
 
                 <div class="container">
-                   
-            
+
+                    <main id="mainpage">
                     <!-- 검색 입력 필드 추가 -->
                     <input type="text" id="searchInput" placeholder="🔍 시설명 검색..." class="search-input">
                                    
@@ -119,15 +138,25 @@ request.setCharacterEncoding("UTF-8");
                             </tr> -->
                         </tbody>
                     </table>
-                   
-                </div>
+                   </main>
+          
+                
                 <aside id="rightside" >
                     <section class="sidebar">
                         <article class="sidebar_title">
                             <div class="ux-title">
                                 <div class="account_name">
                                     <img src = "${contextPath}/resources/assets/images/Account.png" width="70" height="70"> 
-                                    <div>OOO님</div>
+                                                             <c:choose>
+                                <c:when test="${isLogOn == true  && member!= null}">                                
+                                     <div>${member.name} 님</div>
+                                </c:when>
+                                <c:otherwise>
+                                    <div>로그인이 필요합니다.</div>
+                                
+                                </c:otherwise>
+        
+                                </c:choose>
                                 </div>
                             
                             <div class="sideclose">
@@ -143,10 +172,10 @@ request.setCharacterEncoding("UTF-8");
                             <ul>               
                                 <c:choose>
                                 <c:when test="${isLogOn == true  && member!= null}">                                
-                                     <li><a href="/pages/user_info.html" class="ux-link">회원 정보</a></li>
-                                <li><a href="/pages/list_reservation.html" class="ux-link">예약 내역 조회</a></li>
+                  				<li><a href="${contextPath}/member/user_info.do" class="ux-link">회원 정보</a></li>
+                                <li><a href="${contextPath}/pages/list_reservation.do?email=${member.getEmail()}" class="ux-link">예약 내역 조회</a></li>
                                 <li><a href="/pages/user_info_edit.html" class="ux-link">개인 정보 수정</a></li>
-                                             <li><a href="${contextPath}/member/logout.do" class="ux-link">로그아웃</a></li>
+                                <li><a href="${contextPath}/member/logout.do" class="ux-link">로그아웃</a></li>
                                 </c:when>
                                 <c:otherwise>
                                      <li><a  href="${contextPath}/member/loginForm.do"class="ux-link button-mob-sign in">로그인</a></li>
