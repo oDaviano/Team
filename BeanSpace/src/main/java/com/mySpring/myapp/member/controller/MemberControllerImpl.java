@@ -153,7 +153,7 @@ public class MemberControllerImpl   implements MemberController {
 	public ModelAndView myInfo( HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = (String)request.getAttribute("viewname");
 		HttpSession session = request.getSession();
-		System.out.println("info: "+session.getAttribute("member"));
+	//	System.out.println("info: "+session.getAttribute("member"));
 		ModelAndView mav = new ModelAndView();
 //		if(!(boolean) session.getAttribute("isLogOn")){
 //		    
@@ -161,6 +161,7 @@ public class MemberControllerImpl   implements MemberController {
 //		    }
 		mav.setViewName(viewName); 
 		mav.addObject("member",memberVO);
+		System.out.println("member: "+memberVO);
 		return mav;
 	}
 
@@ -217,6 +218,7 @@ public class MemberControllerImpl   implements MemberController {
 	   // mav.addObject("isAvailable", isAvailable);
 	    return isAvailable;
 	}
+
 
 
 

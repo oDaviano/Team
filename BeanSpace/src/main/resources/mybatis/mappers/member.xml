@@ -43,9 +43,9 @@
 	<update id="updateMember" parameterType="memberVO">
      <![CDATA[
 	     update bs_member
-	     set pwd=#{pwd}, name=#{name}, email=#{email}
+	     set pwd=#{pwd}, name=#{name}, email=#{email}, carnum=#{carnum}, phone=#{phone}, mileage=#{mileage}
 	     where
-	     id=#{id}
+	     email=#{email}
       ]]>
 	</update>
 
@@ -63,11 +63,17 @@
 		where  email=#{email} and pwd=#{pwd}		
 	]]>
 	</select>
+		<update id="addmileage" parameterType="string">
+        update bs_member mileage = bs_member.mileage+1
+        WHERE EMAIL = #{email}
+    </update>
 	
 	<select id="checkEmail" parameterType="string" resultType="int">
         SELECT COUNT(*)
         from bs_member
         WHERE EMAIL = #{email}
     </select>
+    
+    
 
 </mapper>

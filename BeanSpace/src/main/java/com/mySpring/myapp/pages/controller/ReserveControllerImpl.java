@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.mySpring.myapp.member.dao.MemberDAO;
+import com.mySpring.myapp.member.service.MemberService;
 import com.mySpring.myapp.member.vo.MemberVO;
 import com.mySpring.myapp.pages.dao.ReserveDAO;
 import com.mySpring.myapp.pages.service.ReserveService;
@@ -21,6 +22,13 @@ import com.mySpring.myapp.pages.vo.ReserveVO;
 
 @Controller("reserveController")
 public class ReserveControllerImpl implements ReserveController{
+	
+	@Autowired
+	private MemberService memberService;
+	@Autowired
+	MemberVO memberVO;
+	@Autowired
+	MemberDAO memberDAO;
 	
 	@Autowired
 	private ReserveService reserveService;
@@ -65,9 +73,16 @@ public class ReserveControllerImpl implements ReserveController{
 		reserve.setRsvnum(++chkrsv);
 
 		result = reserveService.addReserve(reserve);
+		
 		String viewName = (String)request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView(viewName);
+		HttpSession session = request.getSession();
 
+		MemberVO edit = (MemberVO)session.getAttribute("member");
+
+		edit.setMileage(reserve.getMileage()+ edit.getMileage());
+		memberService.updateMember(edit);
+		System.out.println("member:" +edit);
 		return mav;
 	}
 

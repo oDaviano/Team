@@ -50,8 +50,13 @@ public class MemberServiceImpl implements MemberService {
 	@Override
     public boolean isEmailAvailable(String email) throws DataAccessException {
         int count = memberDAO.checkEmail(email);
-        return count == 0; // email이 존재하지 않으면 true 반환
+        return count == 0; // email�씠 議댁옱�븯吏� �븡�쑝硫� true 諛섑솚
     }
+
+	@Override
+	public int updateMember(MemberVO memberVO) throws DataAccessException {
+		return memberDAO.updateMember(memberVO);
+	}
 
 
 	

@@ -51,4 +51,9 @@ public class MemberDAOImpl implements MemberDAO {
     public int checkEmail(String email) throws DataAccessException {
         return sqlSession.selectOne("mapper.member.checkEmail", email);
     }
+	@Override
+	public int updateMember(MemberVO memberVO) throws DataAccessException {
+		int result = sqlSession.update("mapper.member.updateMember", memberVO);
+		return result;
+	}
 }
