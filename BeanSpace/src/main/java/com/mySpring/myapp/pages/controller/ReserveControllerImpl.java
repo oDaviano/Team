@@ -87,23 +87,53 @@ public class ReserveControllerImpl implements ReserveController{
 	}
 
 	@Override
-	@RequestMapping(value = "/pages/reservation_cancel.do", method = RequestMethod.GET)
-	public ModelAndView removeReserve(@RequestParam("rsvnum") int rsvnum, HttpServletRequest request,
+	@RequestMapping(value = "/pages/reservation_cancel.do", method = RequestMethod.POST)
+	public ModelAndView removeReserve(@ModelAttribute("rsvnum") int rsvnum, @ModelAttribute("mileage")int mileage,  HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
+	    HttpSession session = request.getSession();
+
+	    String email =((MemberVO)session.getAttribute("member")).getEmail();	    
+	    System.out.println("rsvnum: "+ rsvnum);
 		reserveService.removeReserve(rsvnum);
-		ModelAndView mav = new ModelAndView("redirect:/main.do");
+		
+		if(session.getAttribute("member") != null){
+		MemberVO edit = (MemberVO)session.getAttribute("member");
+		edit.setMileage(edit.getMileage()-mileage);
+		memberService.updateMember(edit);
+		}
+		
+		ModelAndView mav = new ModelAndView("redirect:/pages/memrsvlist.do");
+		mav.addObject("email",email);
+		
 		return mav;
 	}
 
 	@Override
 	@RequestMapping(value = "/pages/list_reservation.do", method = RequestMethod.GET)
-	public ModelAndView selectMemberReserves(@RequestParam("email") String email, HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String viewName = (String) request.getAttribute("viewName");
-		
+	public ModelAndView selectReserves(@RequestParam("email")String email, HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+		System.out.println(email);
 		List<ReserveVO> reservesList = reserveService.selectMemberReserves(email);
-		ModelAndView mav = new ModelAndView(viewName);
-		System.out.println("Length: "+reservesList.size());
+		ModelAndView mav = new ModelAndView("/pages/list_reservation");
 		mav.addObject("reservesList", reservesList);
+		
+		return mav;
+	}
+	
+
+	@Override
+	@RequestMapping(value = "/pages/memrsvlist.do", method = RequestMethod.GET)
+	public ModelAndView selectMemberReserves(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+		HttpSession session = request.getSession();
+		String viewName = (String) request.getAttribute("viewName");
+		String email = ((MemberVO)session.getAttribute("member")).getEmail();
+		
+
+		List<ReserveVO> reservesList = reserveService.selectMemberReserves(email);
+		ModelAndView mav = new ModelAndView("/pages/list_reservation");
+		mav.addObject("reservesList", reservesList);
+		
 		return mav;
 	}
 

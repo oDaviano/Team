@@ -39,20 +39,16 @@ request.setCharacterEncoding("UTF-8");
 <!-- <script type="text/javascript" src="/js/temp_peg.js"></script> -->
   <script type="text/javascript" src="${contextPath}/resources/js/common.js"></script>
 </head>
-<script>
-
-
-</script>
 <body>
 <div class="container">
   <div class="header">
     <h2>예약 내역.</h2>
 
   </div>
-
   <div class="content">
+
     <div id = "name" class="info"><strong>시설명:</strong> ${reserve.getName()}</div>
-        <div id = "rsvnum" class="info"><strong>예약번호:</strong> ${reserve.getRsvnum()}</div>
+    <div id = "rsvnum" name = "rsvnum" class="info"><strong>예약번호:</strong> ${reserve.getRsvnum()}</div>
     <div id = "address" class="info"><strong>주소:</strong>${reserve.getAddress()}</div>
     <div id = "ptime" class="info"><strong>주차 시간:</strong>${reserve.getPtime()}</div>
     <div id = "etime" class="info"><strong>출차 시간:</strong>${reserve.getEtime()}</div>
@@ -60,15 +56,20 @@ request.setCharacterEncoding("UTF-8");
     <div id = "phone" class="info"><strong>전화번호:</strong>${reserve.getPhone()}</div>
     <div id = "fee" class="info"><strong>결제 금액:</strong> ${reserve.getFee()}</div>
     <div id = "mileage" class="info red">${reserve.getMileage()}</div>
-  </div>
+</div>
 
   <div class="icon">
     <img src="${contextPath}/resources/assets/images/car-icon.png?" alt="">
   </div>
-
+  <form class="content" action="${contextPath}/pages/reservation_cancel.do" method="post">
+     <input type="hidden" name="rsvnum" value="${reserve.getRsvnum()}"> 
+   <input type="hidden" name="mileage" value="${reserve.getMileage()}"> 
   <div class="buttons">
-    <a href = "${contextPath}/main.do"><button type="button" class="main-button">확인</button></a>
+    <a href = "${contextPath}/pages/memrsvlist.do"><button type="button" class="main-button">확인</button></a>
+    <button type="submit" class="main-button">예약 취소</button>
+    </div>
+</form>
   </div>
-</div>
+
 </body>
 </html>

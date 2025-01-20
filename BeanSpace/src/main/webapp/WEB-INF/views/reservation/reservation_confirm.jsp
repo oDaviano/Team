@@ -70,7 +70,7 @@ request.setCharacterEncoding("UTF-8");
   </div>
 
   <div class="buttons">
-    <a href = "${contextPath}/main.do"><button type="button" class="main-button">확인</button></a>
+    <a href = "${contextPath}/pages/memrsvlist.do"><button type="button" class="main-button">확인</button></a>
   </div>
 </div>
 </body>

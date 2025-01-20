@@ -47,7 +47,7 @@
 	</insert>
 
 
-	<delete id="deletReserve" parameterType="String">
+	<delete id="deleteReserve" parameterType="Integer">
 	<![CDATA[
 	   delete from  bs_reservation
 	   where

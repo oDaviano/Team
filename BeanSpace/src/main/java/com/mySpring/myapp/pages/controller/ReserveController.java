@@ -15,9 +15,10 @@ public interface ReserveController {
 	ModelAndView buy(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	ModelAndView addReserve(ReserveVO reserve, HttpServletRequest request, HttpServletResponse response)
 			throws Exception;
-	ModelAndView removeReserve(int id, HttpServletRequest request, HttpServletResponse response) throws Exception;
+	ModelAndView removeReserve(int rsvnum,int mileage, HttpServletRequest request, HttpServletResponse response) throws Exception;
 //	ModelAndView detail(@RequestParam("rsvnum") int rsvnum, HttpServletRequest request, HttpServletResponse response)throws Exception;
-	ModelAndView selectMemberReserves(String email, HttpServletRequest request, HttpServletResponse response) throws Exception;
+	ModelAndView selectMemberReserves( HttpServletRequest request, HttpServletResponse response) throws Exception;
+	ModelAndView selectReserves(String email, HttpServletRequest request, HttpServletResponse response) throws Exception;
 	ModelAndView checkRsvnum(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	ModelAndView viewRsvDetail(int rsvnum, HttpServletRequest request, HttpServletResponse response) throws Exception;
 	ModelAndView nonmemberAuth( HttpServletRequest request, HttpServletResponse response) throws Exception;

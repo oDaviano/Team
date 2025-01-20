@@ -173,13 +173,13 @@ request.setCharacterEncoding("UTF-8");
                                 <c:choose>
                                 <c:when test="${isLogOn == true  && member!= null}">                                
                   				<li><a href="${contextPath}/member/user_info.do" class="ux-link">회원 정보</a></li>
-                                <li><a href="${contextPath}/pages/list_reservation.do?email=${member.getEmail()}" class="ux-link">예약 내역 조회</a></li>
+                                <li><a href="${contextPath}/pages/memrsvlist.do" class="ux-link">예약 내역 조회</a></li>
                                 <li><a href="/pages/user_info_edit.html" class="ux-link">개인 정보 수정</a></li>
                                 <li><a href="${contextPath}/member/logout.do" class="ux-link">로그아웃</a></li>
                                 </c:when>
                                 <c:otherwise>
                                      <li><a  href="${contextPath}/member/loginForm.do"class="ux-link button-mob-sign in">로그인</a></li>
-                                     <li><a href="/pages/list_reservation.html" class="ux-link">예약 내역 조회</a></li>
+                                     <li><a href="/pages/toList.do" class="ux-link">예약 내역 조회</a></li>
                                 
                                 </c:otherwise>
         
