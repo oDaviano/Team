@@ -23,6 +23,18 @@
     gap: 20px;
 }
 
+.signup-form label {
+    text-align: left;
+}
+
+.label1 {
+    align-self: flex-start; /* Flexbox에서 개별 정렬 설정 */
+    margin-top: 10px;
+    text-align: left;
+    color: green;
+    font-size: 14px;
+}
+
 .form-group {
     display: flex;
     align-items: center;

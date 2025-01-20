@@ -62,9 +62,9 @@ request.setCharacterEncoding("UTF-8");
                 <!-- 이메일 입력과 중복확인 -->
                 <div class="form-group">
                     <input type="email" id="email" placeholder="이메일 입력" name="email" autofocus>
-                    <label id="label1"></label>
                     <button type="button" class="btn duplicate-check-btn">중복확인</button>
                 </div>
+                <label id="label1" style="text-align: left;"></label>
                 <!-- 비밀번호 입력 확인 -->
                 <div class="form-group">
                     <input type="password" placeholder="비밀번호 입력" name="pwd" id="password" required>
@@ -91,7 +91,7 @@ request.setCharacterEncoding("UTF-8");
                 </div>
 
                 <!-- 가입하기 버튼 -->
-                <button type="submit" class="btn signup-btn" id="signup-btn" disabled>가입하기</button>
+                <button type="submit" class="btn signup-btn" id="signup-btn" style="display: none;">가입하기</button>
             </form>
         </div>
 
@@ -100,7 +100,7 @@ request.setCharacterEncoding("UTF-8");
 
 
         <script>
-            const password = document.getElementById('password');
+            /* const password = document.getElementById('password');
             const confirmPassword = document.getElementById('confirm_password');
             const passwordError = document.getElementById('password-error');
             const signupBtn = document.getElementById('signup-btn');
@@ -131,7 +131,7 @@ request.setCharacterEncoding("UTF-8");
                 // 이메일 중복 확인
                 $(".duplicate-check-btn").on("click", function () {  
                     var email = $("#email").val();
-console.log(email);
+					console.log(email);
                     // 공백이나 빈 문자열인지 확인
                     if (email === '' || email.length === 0) {
                         // 공백인 경우 메시지를 표시하고 Ajax 요청을 중단
@@ -153,9 +153,11 @@ console.log(email);
                 
                         success: function (response) {
                             // response.isAvailable 값 확인
-                            if (response.isAvailable === true) {
+                            //if (response.isAvailable === true) {
+                            if (response === true) {
                                 // 사용 가능한 이메일인 경우
                                 $("#label1").css("color", "green").text("사용 가능한 이메일입니다.");
+                                $("#signup-btn").prop("disabled", false); // 가입 버튼 활성화
                       
                             } else {
                                 // 사용 불가능한 이메일인 경우
@@ -171,9 +173,81 @@ console.log(email);
                         }
                     }); // End Ajax
                 });
+            }); */
+            
+            $(document).ready(function () {
+                let isEmailValid = false; // 이메일 중복 확인 상태
+                let isPasswordValid = false; // 비밀번호 일치 상태
+
+                // 이메일 중복 확인
+                $(".duplicate-check-btn").on("click", function () {
+                    const email = $("#email").val().trim();
+
+                    // 공백이나 빈 문자열인지 확인
+                    if (email === '' || email.length === 0) {
+                        $("#label1").css("color", "red").text("공백은 이메일로 사용할 수 없습니다.");
+                        $("#signup-btn").css("display", "none"); // 버튼 숨기기
+                        isEmailValid = false;
+                        return;
+                    }
+
+                    const cfurl = `${contextPath}/member/confirmEmail.do`;
+                    $.ajax({
+                        url: cfurl,
+                        data: { email: email },
+                        type: 'POST',
+                        success: function (response) {
+                            if (response === true) {
+                                // 사용 가능한 이메일인 경우
+                                $("#label1").css("color", "green").text("사용 가능한 이메일입니다.");
+                                isEmailValid = true;
+                            } else {
+                                // 사용 불가능한 이메일인 경우
+                                $("#label1").css("color", "red").text("사용 불가능한 이메일입니다.");
+                                isEmailValid = false;
+                            }
+                            toggleSignupButton(); // 버튼 상태 업데이트
+                        },
+                        error: function () {
+                            // 서버 요청 실패 시
+                            $("#label1").css("color", "red").text("오류가 발생했습니다. 다시 시도해주세요.");
+                            isEmailValid = false;
+                            toggleSignupButton();
+                        }
+                    });
+                });
+
+                // 비밀번호 일치 확인
+                const password = $("#password");
+                const confirmPassword = $("#confirm_password");
+                const passwordError = $("#password-error");
+
+                function validatePassword() {
+                    if (password.val() === confirmPassword.val() && password.val() !== '') {
+                        passwordError.text("비밀번호가 일치합니다.").css("color", "green");
+                        isPasswordValid = true;
+                    } else {
+                        passwordError.text("비밀번호가 일치하지 않습니다.").css("color", "red");
+                        isPasswordValid = false;
+                    }
+                    toggleSignupButton(); // 버튼 상태 업데이트
+                }
+
+                password.on("input", validatePassword);
+                confirmPassword.on("input", validatePassword);
+
+                // 버튼 표시/숨기기
+                function toggleSignupButton() {
+                    if (isEmailValid && isPasswordValid) {
+                        $("#signup-btn").css("display", "block"); // 버튼 보이기
+                    } else {
+                        $("#signup-btn").css("display", "none"); // 버튼 숨기기
+                    }
+                }
             });
 
-       
+            
+
         </script>
     </div>
 </body>
