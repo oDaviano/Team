@@ -12,19 +12,19 @@ public class MemberVO {
 	private String phone;
 	private String carnum;
 	private int mileage;
-
+	private int userid;
 	public MemberVO() {
 		
 	}
 
-	public MemberVO(String email, String pwd, String name, String phone, String carnum, int mileage ) {
+	public MemberVO(String email, String pwd, String name, String phone, String carnum, int mileage, int userid ) {
 		this.email = email;
 		this.pwd = pwd;
 		this.name = name;
 		this.phone = phone;
 		this.carnum = carnum;
 		this.mileage = mileage;
-	
+	    this.userid = userid;
 	}
 
 	public String getEmail() {
@@ -74,5 +74,12 @@ public class MemberVO {
 	public void setMileage(int mileage) {
 		this.mileage = mileage;
 		
+	}
+	public int getUID() {
+		return userid;
+	}
+
+	public void setUID(int userid) {
+		this.userid = userid;
 	}
 }

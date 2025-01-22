@@ -16,11 +16,12 @@ public class ReserveVO {
 	private int fee;          // 요금
 	private int mileage;        //마일리지
 	private String email;
+	private int userid;
 
 	public ReserveVO() {
 	}
 
-	public ReserveVO(int rsvnum, String name, String address, String ptime, String etime, String carnum, String phone, int fee, int mileage, String email) {
+	public ReserveVO(int rsvnum, String name, String address, String ptime, String etime, String carnum, String phone, int fee, int mileage, int userid) {
 	    this.rsvnum = rsvnum;
 	    this.name = name;
 	    this.address = address;
@@ -30,10 +31,10 @@ public class ReserveVO {
 	    this.phone = phone;
 	    this.fee = fee;
 	    this.mileage = mileage;
-	    this.email = email;
+	    this.userid = userid;
 	}
 
-	// Getter 및 Setter 메서드
+	// Getter
 	public int getRsvnum() {
 	    return rsvnum;
 	}
@@ -114,4 +115,13 @@ public class ReserveVO {
 	public String getAddress() {
 		return address;
 	}
+	
+	public int getUID() {
+		return userid;
+	}
+
+	public void setUID(int userid) {
+		this.userid = userid;
+	}
+
 }

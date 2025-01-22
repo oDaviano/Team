@@ -21,6 +21,16 @@ public class ReserveDAOImpl implements ReserveDAO{
 	 */
 
 	@Override
+	public int selectCount() throws DataAccessException {
+		return sqlSession.selectOne("mapper.reserve.selectRsvCount");
+	}
+
+	@Override
+	public int addRsvCnt() throws DataAccessException {
+		return  sqlSession.update("mapper.reserve.addRsvCount");
+	}
+	
+	@Override
 	public int deleteReserve(int rsvnum) {
 		return sqlSession.delete("mapper.reserve.deleteReserve", rsvnum);
 	}
@@ -31,9 +41,15 @@ public class ReserveDAOImpl implements ReserveDAO{
 //		reservesList = sqlSession.selectList("mapper.reserve.selectMemberReserves", email);
 		return sqlSession.selectList("mapper.reserve.selectMemberReserves", email);
 	}
+	
+	@Override
+	public List<ReserveVO> selectMemberReserves(int uid) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("mapper.reserve.selectMemberReservesByUID", uid);
+	}
+
 	@Override
 	public int addReserve(ReserveVO reserveVO) {
-		System.out.println("rsvnum values: "+reserveVO.getRsvnum() +", "+reserveVO.getEmail());
 		return sqlSession.insert("mapper.reserve.addReserve", reserveVO);
 	}
 
@@ -47,6 +63,9 @@ public class ReserveDAOImpl implements ReserveDAO{
 	public ReserveVO viewDetail(int rsvnum) {
 		return sqlSession. selectOne("mapper.reserve.rsvDetail", rsvnum);
 	}
+
+
+
 
 	
 

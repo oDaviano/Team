@@ -70,8 +70,10 @@ $(function(){
 		 console.log(session);
 	   // location.href=loginForm;
 		  }
+	  console.log("${isLogOn}");
 	  console.log("${member}");
 	  console.log("${member.getName()}");
+	  console.log("${member.getEmail()}");
 });
 </script>
 <body>
@@ -97,8 +99,8 @@ $(function(){
                 <div class="info-item">적립금: ${member.getMileage()} point</div>
             </div>
         </main>
-
-        <aside id="rightside" >
+	    <jsp:include page="/WEB-INF/views/common/aside.jsp" />
+       <%--  <aside id="rightside" >
                     <section class="sidebar">
                         <article class="sidebar_title">
                             <div class="ux-title">
@@ -147,10 +149,11 @@ $(function(){
                 </article>
     </section>
     
-        </aside>
+        </aside> --%>
     </div>
 
     <script>
+    
         document.addEventListener('DOMContentLoaded', function () {
             // 메뉴 열기
             document.getElementById('button_menu').addEventListener('click', function () {
@@ -162,6 +165,7 @@ $(function(){
                 document.querySelector('aside').classList.remove('active');
             });
         });
+    
     </script>
 </body>
 </html>

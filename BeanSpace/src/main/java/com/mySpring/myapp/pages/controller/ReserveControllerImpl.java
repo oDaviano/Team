@@ -68,21 +68,25 @@ public class ReserveControllerImpl implements ReserveController{
 	public ModelAndView addReserve(@ModelAttribute("reserve") ReserveVO reserve,
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
+		HttpSession session = request.getSession();
+		int uid = (int)session.getAttribute("uid");
 		int result = 0;	
-		int chkrsv = reserveService.checkRsvnum();
+		int chkrsv = reserveService.selectCount();
+		//System.out.println(chkrsv);
 		reserve.setRsvnum(++chkrsv);
+		reserve.setUID(uid);
 
 		result = reserveService.addReserve(reserve);
-		
+
 		String viewName = (String)request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView(viewName);
-		HttpSession session = request.getSession();
 
-		MemberVO edit = (MemberVO)session.getAttribute("member");
-
+		reserveService.addRsvCount();
+		MemberVO edit = memberService.selectMyInfo(uid);
+		
 		edit.setMileage(reserve.getMileage()+ edit.getMileage());
-		memberService.updateMember(edit);
-		System.out.println("member:" +edit);
+		result = memberService.updateMileage(edit);
+		//System.out.println("member:" +edit);
 		return mav;
 	}
 
@@ -92,18 +96,17 @@ public class ReserveControllerImpl implements ReserveController{
 			HttpServletResponse response) throws Exception {
 	    HttpSession session = request.getSession();
 
-	    String email =((MemberVO)session.getAttribute("member")).getEmail();	    
+	    int uid =(Integer)session.getAttribute("userid");	    
 	    System.out.println("rsvnum: "+ rsvnum);
 		reserveService.removeReserve(rsvnum);
 		
-		if(session.getAttribute("member") != null){
-		MemberVO edit = (MemberVO)session.getAttribute("member");
+		if((boolean)session.getAttribute("isLogOn")){
+		MemberVO edit = memberService.selectMyInfo(uid);
 		edit.setMileage(edit.getMileage()-mileage);
 		memberService.updateMember(edit);
 		}
 		
 		ModelAndView mav = new ModelAndView("redirect:/pages/memrsvlist.do");
-		mav.addObject("email",email);
 		
 		return mav;
 	}
@@ -127,10 +130,10 @@ public class ReserveControllerImpl implements ReserveController{
 
 		HttpSession session = request.getSession();
 		String viewName = (String) request.getAttribute("viewName");
-		String email = ((MemberVO)session.getAttribute("member")).getEmail();
+		int uid = (int)session.getAttribute("userid");
 		
 
-		List<ReserveVO> reservesList = reserveService.selectMemberReserves(email);
+		List<ReserveVO> reservesList = reserveService.selectMemberReserves(uid);
 		ModelAndView mav = new ModelAndView("/pages/list_reservation");
 		mav.addObject("reservesList", reservesList);
 		

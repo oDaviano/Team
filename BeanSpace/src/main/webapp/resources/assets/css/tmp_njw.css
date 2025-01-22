@@ -169,8 +169,9 @@ td a:hover {
 }
 
 aside {
-   /* display: none;
-    background-color: white;
+
+    background-color: white; 
+    /*
     position: fixed;  화면에 고정 */
    /*  top: 0;
     right: 0; 기본 위치를 화면 안으로 변경 */
@@ -182,41 +183,41 @@ aside {
   /*  transition: transform 0.3s ease-in-out;  애니메이션 추가 */
 }
 
-/* 사이드바 활성화 시 */
-
-aside.active {
- /*    display: block;
-   transform: translateX(0);  화면 안으로 완전히 표시 */
-}
-
 /* 사이드바 내부 콘텐츠 */
-aside .sidebar {
+aside .sidebar {  /*
     display: flex;
     flex-direction: column;
-  /*  padding: 15px;*/
+  padding: 15px;*/
 }
 
 /* 상단 제목 섹션 */
 .sidebar .sidebar_title {
-    display: flex;
-    justify-content: space-between; /* 좌우 정렬 */
+    /* display: flex;
+    justify-content: space-between; 
     align-items: center;
     padding: 15px;
-    border-bottom: 2px solid #ddd;
+    border-bottom: 2px solid #ddd; */
+    justify-content:space-between;
+    flex-direction: row;
+  
+    height: 20%;
+    padding: 15px;
+    gap:15px;
+    border-bottom: 2px solid black;
 }
 
 /* account_name과 버튼을 가로로 배치 */
 .sidebar .sidebar_title .ux-title {
-    display: flex;
+    /* display: flex;
     align-items: center;
-    width: 100%;
+    width: 100%; */
 }
 
 /* 아이콘과 텍스트 정렬 */
 .sidebar .sidebar_title .account_name {
-    display: flex;
+ /*   display: flex;
     align-items: center;
-    margin-right: auto; /* 왼쪽 정렬 */
+    margin-right: auto;  왼쪽 정렬 */
 }
 
 .sidebar .sidebar_title .account_name img {
@@ -225,15 +226,15 @@ aside .sidebar {
 
 /* 닫기 버튼 */
 .sidebar .sidebar_title .sideclose {
-    margin-left: auto; /* 버튼을 오른쪽으로 정렬 */
-    margin-right: 20px;
+    /* margin-left: auto; /* 버튼을 오른쪽으로 정렬 */
+   /* margin-right: 20px; */
 }
 
 .sidebar .sidebar_title .button-close {
-    font-size: 24px;
+    /* font-size: 24px;
     cursor: pointer;
     background: none;
-    border: none;
+    border: none; */
 }
 
 /* 메뉴 항목 */

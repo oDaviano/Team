@@ -55,7 +55,14 @@ $(function () {
 	 $("#phone-number").val("${member.getPhone()}");
 	 $("#hemail").val("${member.getEmail()}");  
 		setFee(0);
+		
+	
 });
+
+function onSubmit(){
+	let f = document.forms;
+	alert(f.ptime.value);
+}
 </script>
 <body>
 	<div class="container">
@@ -64,18 +71,14 @@ $(function () {
 			<img src="${contextPath}/resources/assets/images/car-icon.png"
 				alt="Car Icon">
 		</div>
-
-		<form action="${contextPath}/reservation/reservation_confirm.do"
-			method="post">
-			<label for="parking-time">주차 시간</label> <input type="datetime-local"
-				id="parking-time" name="ptime" onchange="setMinValue()"> <label
-				for="exit-time">출차 시간</label> <input type="datetime-local"
-				id="exit-time" name="etime" onchange="setMinValue()"> <label
-				for="car-number">차량 번호</label> <input type="text" id="car-number"
-				name="carnum"> <label for="phone-number">전화번호('-' 	없이)</label> <input
-				type="text" id="phone-number" name="phone">
-
-
+		<form action="${contextPath}/reservation/reservation_confirm.do" method="post" name="forms" onSubmit='{()=> return onSubmit()}'>
+			<label for="parking-time">주차 시간</label> 
+			<input type="datetime-local" id="parking-time" name="ptime" onchange="setMinValue()"> 
+			<label for="exit-time">출차 시간</label> <input type="datetime-local" id="exit-time" name="etime" onchange="setMinValue()"> 
+			<label for="car-number">차량 번호</label> 
+			<input type="text" id="car-number" name="carnum"> 
+			<label for="phone-number">전화번호('-' 없이)</label> 
+			<input type="text" id="phone-number" name="phone">
 			<div id="feeText" class="info">결제 금액:</div>
 			<c:choose>
 
@@ -86,7 +89,6 @@ $(function () {
 					<input type="text" id="hemail" name="email" onchage="checkReg()"></input>
 				</c:when>
 				<c:otherwise>
-					<input id="hemail" type="hidden" name="email"></input>
 					<div id="mileageText" class="info red">+</div>
 				</c:otherwise>
 
@@ -98,9 +100,8 @@ $(function () {
 			<input id="hfee" type="hidden" name="fee"></input> 
 			<input id="hmileage" type="hidden" name="mileage"></input> 
 			<input id="haddress" type="hidden" name="address"></input> 
-			<input id="rsvnum" type="hidden" name="rsvnum"></input>
-
-
+			<input id="userid" type="hidden" name="userid" value="0"></input> 
+			<input id="rsvnum" type="hidden" name="rsvnum" value="0"></input>
 			<div class="buttons">
 				<button type="submit" class="submit-button">구매</button>
 				<button type="button" onclick="history.back()" class="cancel-button">취소</button>

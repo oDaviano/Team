@@ -7,12 +7,9 @@ request.setCharacterEncoding("UTF-8");
 %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
-<html>
 <html lang="ko" class="">
 <head>
-    <meta charset="UTF-8">
-    <title>Document</title>
-</head>    
+    <meta charset="UTF-8">  
   <meta charset="UTF-8">
   <meta http-equiv="Content-Style-Type" content="text/css">
   <meta http-equiv="Content-Script-Type" content="text/javascript">
@@ -48,21 +45,7 @@ request.setCharacterEncoding("UTF-8");
   <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=8ze2pCtEXZEBra8ProWgd2QGH69Ew8A4G6U6B6NC"></script>
 </head>
 <body>
-<%--     <div class="container">
-       
-        <header class="header">
-            <div class="car-icon">
-                <a href="/pages/main.html" id="carIconLink">
-                    <img src="${contextPath}/resources/assets/images/car-icon.png" alt="Car Icon" />
-                </a>
-            </div>
-            <h1 class="header-title2">예약 내역 조회</h1>
-            <div id="button_menu" class="menu-icon">         
-                <img src = "${contextPath}/resources//assets/images/List.png" alt="menu icon">  </div>
-        </header>
-   
-</div>
- --%>                     <header>
+               <header>
                 <!-- <div class="observer-layout"></div> -->
                 <!-- <section class="header-pc1 load">.load: setCommon 함수로 AJAX 로드</section> -->
                 <!-- <section class="header-mob load">.load: setCommon 함수로 AJAX 로드</section> -->
@@ -141,7 +124,7 @@ request.setCharacterEncoding("UTF-8");
                    </main>
           
                 
-                <aside id="rightside" >
+                <%-- <aside id="rightside" >
                     <section class="sidebar">
                         <article class="sidebar_title">
                             <div class="ux-title">
@@ -190,8 +173,9 @@ request.setCharacterEncoding("UTF-8");
                 </article>
     </section>
     
-        </aside>
+        </aside> --%>
     </div>
+    	    <jsp:include page="/WEB-INF/views/common/aside.jsp" />
 
     <script>
      // 검색 기능
