@@ -21,32 +21,65 @@ request.setCharacterEncoding("UTF-8");
 
 <link type="image/png" rel="shortcut icon" href="${contextPath}/resources/assets/images/favicon/favicon.png">
 <link type="text/css" rel="stylesheet" href="${contextPath}/resources/assets/css/font.css">
-<link type="text/css" rel="stylesheet" href="${contextPath}/resources/assets/css/common.css">
+<%-- <link type="text/css" rel="stylesheet" href="${contextPath}/resources/assets/css/common.css"> --%>
 
 <script type="text/javascript">var contextPath = "${contextPath}";</script>
 
 
 <title>404 Not Found</title>
 <style>
-	html, body,.container, section, main {width: 100%;height: 100%;}
-	article {width: 90%;height: 100%;align-items:flex-start;}
-	.my_div {
-		background-image: url("${contextPath}/resources/assets/images/common/ErrorBG.jpg");
-		background-size: cover;
-		}
-	.error_discrption {margin-top: 30px;}
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        /* background-color: #f4f4f4; */ 
+        color: #333;
+    }
+
+    .container {
+        text-align: center;
+    }
+
+    .error-image {
+        max-width: 450px; /* 이미지 크기 조정 */
+        margin-top: -400px;
+        
+    }
+
+    h1 {
+        font-size: 3rem;
+        margin: 0;
+        margin-top: -60px; /* 이미지 아래로 내리기 */
+    }
+
+    p {
+        font-size: 1.5rem;
+    }
+
+    button {
+    	margin-top: 30px;
+        background-color: #007BFF; 
+        color: white;
+        border: none;
+        padding: 12px 24px;
+        font-size: 1.2rem;
+        font-weight: bold;
+        border-radius: 8px;
+        cursor: pointer;
+        }
+        
 </style>
 </head>
 <body>
- 	<div class="container my_div">
- 		<main>
-	 		<section>
-			 	<article>
-					<h3 class="error_title">페이지를 찾을 수 없습니다.</h3>
-					<h5 class="error_discrption">페이지의 주소가 잘못 입력되었거나 삭제된 페이지입니다.</h5>
-			 	</article>
-			</section>
-		</main>
-	</div>
+    <div class="container">
+        <img class="error-image" src="${contextPath}/resources/assets/images/errorCar.png" alt="404 Error">
+        <h1>404</h1>
+        <p>죄송합니다.<p>페이지를 찾을 수 없습니다.</p>
+        <button type="button" onclick="location.href='${contextPath}/main.do'">홈으로 돌아가기</button>
+    </div>
 </body>
 </html>

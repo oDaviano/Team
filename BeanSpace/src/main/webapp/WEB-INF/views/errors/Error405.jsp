@@ -31,23 +31,19 @@ request.setCharacterEncoding("UTF-8");
 	html, body,.container, section, main {width: 100%;height: 100%;}
 	article {width: 90%;height: 100%;align-items:flex-start;}
 	.my_div {
-		background-image: url("${contextPath}/resources/assets/images/common/ErrorBG.jpg");
+		background-image: url("../resources/assets/images/common/ErrorBG.jpg");
 		background-size: cover;
 		}
 	.error_discrption {margin-top: 30px;}
 </style>
 </head>
 <body>
- 	<div class="container my_div">
- 		<main>
-	 		<section>
-			 	<article>
-					<h3 class="error_title">허용되지 않는 메서드입니다.</h3>
-					<h5 class="error_discrption">요청한 HTTP 메서드는 이 리소스에서 허용되지 않습니다. 사용 가능한 메서드를 확인해 주세요.</h5>
-					<p>다시 시도하거나, 필요한 경우 관리자에게 문의해 주세요.</p>
-			 	</article>
-			</section>
-		</main>
-	</div>
+    <div class="container">
+        <img class="error-image" src="${contextPath}/resources/assets/images/errorCar.png" alt="405 Error">
+        <h1 class=>405</h1> <!-- h1에 error_title 클래스 적용 -->
+        <p class="error_title">요청한 HTTP 메서드는 이 리소스에서 허용되지 않습니다.</p>
+        <p class="error_discrption">다시 시도하거나, 필요한 경우 관리자에게 문의해 주세요.</p> <!-- 기존 설명 유지 -->
+        <button type="button" onclick="location.href='${contextPath}/main.do'">홈으로 돌아가기</button>
+    </div>
 </body>
  </html>
