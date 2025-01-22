@@ -53,7 +53,7 @@ public class MemberControllerImpl   implements MemberController {
 		member.setUID(++counter);
 		result = memberService.addMember(member);
 		result = memberService.addUIDCount();
-		ModelAndView mav = new ModelAndView("redirect:/member/loginFom.do");
+		ModelAndView mav = new ModelAndView("redirect:/member/loginForm.do");
 		return mav;
 	}
 	
@@ -62,7 +62,7 @@ public class MemberControllerImpl   implements MemberController {
 	public ModelAndView updateMember(@ModelAttribute("member") MemberVO member, HttpServletRequest request, HttpServletResponse response) throws Exception {		
 		request.setCharacterEncoding("utf-8");
 		HttpSession session = request.getSession();
-		int uid = (int)session.getAttribute("uid");
+		int uid = (int)session.getAttribute("userid");
 		member.setUID(uid);
 		
 		int reuslt = memberService.updateMember(member);
@@ -112,7 +112,7 @@ public class MemberControllerImpl   implements MemberController {
 	@RequestMapping(value = "/member/logout.do", method =  RequestMethod.GET)
 	public ModelAndView logout(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		HttpSession session = request.getSession();
-		session.removeAttribute("uid");
+		session.removeAttribute("userid");
 		session.removeAttribute("isLogOn");
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("redirect:/main.do");
@@ -204,7 +204,7 @@ public class MemberControllerImpl   implements MemberController {
 	public ModelAndView confirmPwd(String pwd, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
 		HttpSession session  = request.getSession();
-		int uid = ((int)session.getAttribute("uid"));
+		int uid = ((int)session.getAttribute("userid"));
 		MemberVO curInfo = memberService.selectMyInfo(uid);
 		String curPwd = (curInfo.getPwd());
 		ModelAndView mav = new ModelAndView();

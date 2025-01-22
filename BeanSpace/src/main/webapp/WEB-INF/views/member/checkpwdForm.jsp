@@ -52,8 +52,11 @@ request.setCharacterEncoding("UTF-8");
             <section class="title_header" >
                 <article class="main_header">
                     <div id="header_bg">
-            <div id="logo">          
-                <img src = "${contextPath}/resources/assets/images/car-icon.png" width="100" height="90"> </div>            
+ <div class="car-icon">
+                <a href="${contextPath}/main.do" id="carIconLink">
+                    <img src="${contextPath}/resources/assets/images/car-icon.png" alt="Car Icon">
+                </a>
+            </div>         
             <div id="button_menu" class="button-menu open-menu">         
                 <img src = "${contextPath}/resources/assets/images/List.png" width="70" height="70"> 
            </div>
@@ -107,7 +110,7 @@ request.setCharacterEncoding("UTF-8");
     
         </aside> --%>
         <div class="container">	               
-                    <h3>현재 비밀번호를 입력해주세요</h3>
+                    <h4>현재 비밀번호를 입력해주세요</h4>
                     <!-- 검색 입력 필드 추가 -->
                  <form action="${contextPath}/member/modMemberForm.do" method="post">
                     <input type="password"  id="searchInput" name="pwd" placeholder="현재 비밀번호" class="search-input">      
@@ -116,12 +119,6 @@ request.setCharacterEncoding("UTF-8");
                             </div>   
                     </form>                 
                 </div>
-
-         
-
-
-
-
     <script>
     
     $("#searchInput").change(function() {

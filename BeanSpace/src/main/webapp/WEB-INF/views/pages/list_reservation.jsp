@@ -53,8 +53,12 @@ request.setCharacterEncoding("UTF-8");
             <section class="title_header" >
                 <article class="main_header">
                     <div id="header_bg">
-            <div id="logo">          
-                <img src = "${contextPath}/resources/assets/images/car-icon.png" width="100" height="90"> </div>            
+              <div class="car-icon">
+                <a href="${contextPath}/main.do" id="carIconLink">
+                    <img src="${contextPath}/resources/assets/images/car-icon.png" alt="Car Icon">
+                </a>
+            </div>  
+                        <h1 class="header-title">예약 내역</h1>         
             <div id="button_menu" class="button-menu open-menu">         
                 <img src = "${contextPath}/resources/assets/images/List.png" width="70" height="70"> 
            </div>

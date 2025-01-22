@@ -63,8 +63,8 @@
 
 	<insert id="addReserve" parameterType="reserveVO">
 		<![CDATA[
-		 insert into bs_reservation(rsvnum, name, ptime, etime, phone, carnum, fee, mileage ,address,userid )
-		 values(#{rsvnum}, #{name}, #{ptime},#{etime}, #{phone}, #{carnum}, #{fee}, #{mileage},#{address},#{userid})
+		 insert into bs_reservation(rsvnum, name, ptime, etime, phone, carnum, fee, mileage ,email,address,userid )
+		 values(#{rsvnum}, #{name}, #{ptime},#{etime}, #{phone}, #{carnum}, #{fee}, #{mileage},#{email}, #{address},#{userid})
 		]]>
 	</insert>
 

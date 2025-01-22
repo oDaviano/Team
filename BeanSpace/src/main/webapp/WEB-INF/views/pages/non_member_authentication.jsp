@@ -51,8 +51,8 @@ request.setCharacterEncoding("UTF-8");
        
         <header class="header">
             <div class="car-icon">
-                <a href="/pages/main.html" id="carIconLink">
-                    <img src="${contextPath}/resources/assets/images/car-icon.png" alt="Car Icon" />
+        <a href="${contextPath}/main.do" id="carIconLink">
+                    <img src="${contextPath}/resources/assets/images/car-icon.png" alt="Car Icon">
                 </a>
             </div>
             <h1 class="header-title2">예약 조회</h1>

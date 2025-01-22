@@ -83,7 +83,7 @@ function onSubmit(){
 			<c:choose>
 
 
-				<c:when test="${isLogOn == false  || member== null}">
+				<c:when test="${isLogOn==null	 ||isLogOn == false}">
 
 					<label for="nm-rsvnum">예약 확인 번호</label>
 					<input type="text" id="hemail" name="email" onchage="checkReg()"></input>

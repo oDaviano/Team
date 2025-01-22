@@ -70,10 +70,6 @@ $(function(){
 		 console.log(session);
 	   // location.href=loginForm;
 		  }
-	  console.log("${isLogOn}");
-	  console.log("${member}");
-	  console.log("${member.getName()}");
-	  console.log("${member.getEmail()}");
 });
 </script>
 <body>
