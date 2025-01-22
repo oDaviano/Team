@@ -8,12 +8,16 @@ import com.mySpring.myapp.member.vo.MemberVO;
 
 
 public interface MemberDAO {
-	 public MemberVO  selectMyInfo(String email)throws DataAccessException ;
-	 public List selectAllMemberList() throws DataAccessException;
+		public int selectCount()throws DataAccessException;
+		public int addUserID() throws DataAccessException; 
+	 public MemberVO  selectMyInfo(int uid)throws DataAccessException ;
+	 //public List selectAllMemberList() throws DataAccessException;
 	 public int insertMember(MemberVO memberVO) throws DataAccessException ;
-	 public int deleteMember(String email) throws DataAccessException;
+	 //public int deleteMember(String email) throws DataAccessException;
 	 public MemberVO loginById(MemberVO memberVO) throws DataAccessException;
 	 public int checkEmail(String email) throws DataAccessException;
+	 public boolean checkPwd(String pwd) throws DataAccessException;
 	 public int updateMember(MemberVO memberVO) throws DataAccessException ;
+	 public int updateMileage(MemberVO memberVO)throws DataAccessException ;
 
 }

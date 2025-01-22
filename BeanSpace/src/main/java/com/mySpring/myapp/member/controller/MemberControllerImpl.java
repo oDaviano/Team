@@ -37,54 +37,44 @@ public class MemberControllerImpl   implements MemberController {
 	@RequestMapping(value = { "/","/main.do"}, method = RequestMethod.GET)
 	private ModelAndView main(HttpServletRequest request, HttpServletResponse response) {
 		String viewName = (String)request.getAttribute("viewName");	
-		System.out.println(viewName);
+
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName(viewName);
 		return mav;
 	}
 	
-//	@Override 
-//	@RequestMapping(value="/member/listMembers.do" ,method = RequestMethod.GET)
-//	public ModelAndView listMembers(HttpServletRequest request, HttpServletResponse response) throws Exception {
-//		String viewName = (String)request.getAttribute("viewName");
-//		System.out.println("listviewName: " + viewName);
-//		List membersList = memberService.listMembers();
-//		ModelAndView mav = new ModelAndView(viewName);
-//		mav.addObject("membersList", membersList);
-//		return mav;
-//	}
-
 	@Override
 	@RequestMapping(value="/member/addMember.do" ,method = RequestMethod.POST)
-	public ModelAndView addMember(@ModelAttribute("member") MemberVO member,
-			                  HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ModelAndView addMember(@ModelAttribute("member") MemberVO member, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
-		int result = 0;
+		
+		int counter = memberService.selectCount();
+		int result= 0;
+		member.setUID(++counter);
 		result = memberService.addMember(member);
-		ModelAndView mav = new ModelAndView("redirect:/member/user_info.do");
+		result = memberService.addUIDCount();
+		ModelAndView mav = new ModelAndView("redirect:/member/loginForm.do");
 		return mav;
 	}
 	
-//	@Override
-//	@RequestMapping(value="/member/removeMember.do" ,method = RequestMethod.GET)
-//	public ModelAndView removeMember(@RequestParam("id") String id, 
-//			           HttpServletRequest request, HttpServletResponse response) throws Exception{
-//		request.setCharacterEncoding("utf-8");
-////		String user_id = request.getParameter("id");
-//		memberService.removeMember(id);
-//		ModelAndView mav = new ModelAndView("redirect:/member/listMembers.do");
-//		return mav;
-//	}
-	/*
-	@RequestMapping(value = { "/member/loginForm.do", "/member/memberForm.do" }, method =  RequestMethod.GET)
-	@RequestMapping(value = "/member/*Form.do", method =  RequestMethod.GET)
-	public ModelAndView form(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String viewName = getViewName(request);
+	@Override
+	@RequestMapping(value = "/member/modMember.do", method = RequestMethod.POST)
+	public ModelAndView updateMember(@ModelAttribute("member") MemberVO member, HttpServletRequest request, HttpServletResponse response) throws Exception {		
+		request.setCharacterEncoding("utf-8");
+		HttpSession session = request.getSession();
+		int uid = (int)session.getAttribute("userid");
+		member.setUID(uid);
+		
+		int reuslt = memberService.updateMember(member);
+
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName(viewName);
+		MemberVO curSes = memberService.selectMyInfo(uid) ;
+
+		session.setAttribute("member", curSes);
+		
+		mav.setViewName("redirect:/member/user_info.do");
 		return mav;
 	}
-	*/
 	
 	@Override
 	@RequestMapping(value = "/member/login.do", method = RequestMethod.POST)
@@ -92,12 +82,17 @@ public class MemberControllerImpl   implements MemberController {
 				              RedirectAttributes rAttr,
 		                       HttpServletRequest request, HttpServletResponse response) throws Exception {
 	ModelAndView mav = new ModelAndView();
-//	System.out.println(member.getEmail()+"/"+member.getPwd()+"/"+member.getName()+"/"+member.getPhone()+"/"+member.getCarnum()+"/"+member.getMileage());
+	//System.out.println(member.getUID()+"/"+member.getEmail()+"/"+member.getPwd()+"/"+member.getName()+"/"+member.getPhone()+"/"+member.getCarnum()+"/"+member.getMileage());
 	memberVO = memberService.login(member);
 	if(memberVO != null) {
 	    HttpSession session = request.getSession();
-	    session.setAttribute("member", memberVO);
+	    int uid = memberVO.getUID();
+	    session.setAttribute("userid", uid);
+	    //session.setAttribute("member", memberVO);
+	    System.out.println("userid: "+uid);
 	    session.setAttribute("isLogOn", true);
+	    session.setAttribute("name", memberVO.getName());
+	    System.out.println("isLogOn: "+session.getAttribute("isLogOn"));
 	    String action = (String)session.getAttribute("action");
 	    session.removeAttribute("action");
 	    if(action!= null) {	
@@ -117,7 +112,7 @@ public class MemberControllerImpl   implements MemberController {
 	@RequestMapping(value = "/member/logout.do", method =  RequestMethod.GET)
 	public ModelAndView logout(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		HttpSession session = request.getSession();
-		session.removeAttribute("member");
+		session.removeAttribute("userid");
 		session.removeAttribute("isLogOn");
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("redirect:/main.do");
@@ -153,15 +148,13 @@ public class MemberControllerImpl   implements MemberController {
 	public ModelAndView myInfo( HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = (String)request.getAttribute("viewname");
 		HttpSession session = request.getSession();
-	//	System.out.println("info: "+session.getAttribute("member"));
+		int uid = ((int)session.getAttribute("userid"));
+
+		MemberVO result = memberService.selectMyInfo(uid);
+		System.out.println(result.getMileage());
 		ModelAndView mav = new ModelAndView();
-//		if(!(boolean) session.getAttribute("isLogOn")){
-//		    
-//		 	   mav.setViewName("redirect:/member/loginForm.do");	
-//		    }
+		mav.addObject("member", result);
 		mav.setViewName(viewName); 
-		mav.addObject("member",memberVO);
-		System.out.println("member: "+memberVO);
 		return mav;
 	}
 
@@ -195,16 +188,6 @@ public class MemberControllerImpl   implements MemberController {
 		}
 		return viewName;
 	}
-	
-//	@Override
-//	@RequestMapping(value = "/member/confirmEmail.do", method = RequestMethod.POST)
-//	public ModelAndView confirmEmail(@RequestParam("email") String email) {
-//	    System.out.println("confirmEmail 호출됨: " + email);
-//	    boolean isAvailable = memberService.isEmailAvailable(email);
-//	    ModelAndView mav = new ModelAndView("jsonView");
-//	    mav.addObject("isAvailable", isAvailable);
-//	    return mav;
-//	}
 
 	@Override
 	@RequestMapping(value = "/member/confirmEmail.do", method = RequestMethod.POST)
@@ -213,14 +196,30 @@ public class MemberControllerImpl   implements MemberController {
 	    System.out.println("confirmEmail 호출됨: " + email);
 	    boolean isAvailable = memberService.isEmailAvailable(email);
     // View 이름을 명시하지 않고 데이터를 직접 전달
-	    System.out.println(isAvailable);
-
-	   // mav.addObject("isAvailable", isAvailable);
 	    return isAvailable;
 	}
 
-
-
-
-
+	@Override
+	@RequestMapping(value = "/member/modMemberForm.do", method = RequestMethod.POST)
+	public ModelAndView confirmPwd(String pwd, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		HttpSession session  = request.getSession();
+		int uid = ((int)session.getAttribute("userid"));
+		MemberVO curInfo = memberService.selectMyInfo(uid);
+		String curPwd = (curInfo.getPwd());
+		ModelAndView mav = new ModelAndView();
+		System.out.println("check: "+pwd);
+		System.out.println("chekc2: "+curPwd);
+		if(!pwd.equals(curPwd)) {
+			request.setAttribute("msg", "비밀번호가 일치하지 않습니다.");
+			String referer = request.getHeader("Referer");
+		       mav.setViewName("redirect:"+referer);
+		}
+		else {
+			String viewName = (String)request.getAttribute("viewName");	
+		      mav.setViewName(viewName);
+		}
+		return mav;
+}
+	
 }

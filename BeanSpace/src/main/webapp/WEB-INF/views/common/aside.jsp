@@ -8,8 +8,61 @@ request.setCharacterEncoding("UTF-8");
 %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
+  <aside id="rightside" >
+<%--          <tiles:insertAttribute name="aside"/>  --%>
+                    <section class="sidebar">
+                        <article class="sidebar_title">
+                            <div class="ux-title">
+                                <div class="account_name">
+                                
+                                    <img src = "${contextPath}/resources/assets/images/Account.png" width="70" height="70"> 
+                                                      <c:choose>
+                                <c:when test="${isLogOn == true}">                                
+                                     <div>${name} 님</div>
+                                </c:when>
+                                <c:otherwise>
+                                    <div>로그인이 필요합니다.</div>
+                                
+                                </c:otherwise>
+        
+                                </c:choose>
+                              
+                                </div>
+                            
+                            <div class="sideclose">
+                                <button type="button" class="ux-button icon-only button-menu button-close" tabindex="0">
+                                    X
+                                </button>
+                            </div>
+                        </div>
+                        </article>
+                        <article>
+                    <div class="main">
+                        <div class="menu-list">
+                            <ul>               
+                                <c:choose>
+                                <c:when test="${isLogOn == true}">                                
+                                <li><a href="${contextPath}/member/user_info.do" class="ux-link">회원 정보</a></li>
+                                <li><a href="${contextPath}/pages/memrsvlist.do" class="ux-link">예약 내역 조회</a></li>
+                                <li><a href="${contextPath}/member/checkpwdForm.do" class="ux-link">개인 정보 수정</a></li>
+                                <li><a href="${contextPath}/member/logout.do" class="ux-link">로그아웃</a></li>
+                                </c:when>
+                                <c:otherwise>
+                                     <li><a  href="${contextPath}/member/loginForm.do"class="ux-link button-mob-sign in">로그인</a></li>
+                                     <li><a href="${contextPath}/pages/non_member_authentication.do" class="ux-link">예약 내역 조회</a></li>
+                                
+                                </c:otherwise>
+        
+                                </c:choose>
+                            </ul>
+                        </div>
+                    </div>
+                </article>
+    </section>
+    
+        </aside>
 
-<div class="backdrop"></div>
+<%-- <div class="backdrop"></div>
 <div class="mobile-total-menu">
 	<header class="mob-header">
 		<section>
@@ -65,4 +118,4 @@ request.setCharacterEncoding("UTF-8");
 			</div>
 		</div>
 	</header>
-</div>
+</div> --%>

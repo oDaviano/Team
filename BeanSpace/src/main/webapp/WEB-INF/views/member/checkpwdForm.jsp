@@ -9,7 +9,7 @@ request.setCharacterEncoding("UTF-8");
 <!DOCTYPE html>
 <html lang="ko" class="">
 <head>
-    <meta charset="UTF-8">  
+ 
   <meta charset="UTF-8">
   <meta http-equiv="Content-Style-Type" content="text/css">
   <meta http-equiv="Content-Script-Type" content="text/javascript">
@@ -26,10 +26,8 @@ request.setCharacterEncoding("UTF-8");
   <meta name="description" content="빈자리 description">
   <title>빈자리</title>
 
-  <!-- <link type="image/png" rel="shortcut icon" href=""> -->
-
   <link type="text/css" rel="stylesheet" href="${contextPath}/resources/assets/css/font.css">
-    <link type="text/css" rel="stylesheet" href="${contextPath}/resources/assets/css/common	.css">
+    <link type="text/css" rel="stylesheet" href="${contextPath}/resources/assets/css/common.css">
   <link type="text/css" rel="stylesheet" href="${contextPath}/resources/assets/css/tmp_njw.css">
   <link type="text/css" rel="stylesheet" href="${contextPath}/resources/assets/css/tmp_peg.css">
   <link type="text/css" rel="stylesheet" href="${contextPath}/resources/lib/jquery-ui-1.12.1.min.css">
@@ -39,13 +37,14 @@ request.setCharacterEncoding("UTF-8");
   <script type="text/javascript" src="${contextPath}/resources/lib/jquery-1.12.4.min.js"></script>
   <script type="text/javascript" src="${contextPath}/resources/lib/jquery-ui-1.12.1.min.js"></script>
   <script type="text/javascript" src="${contextPath}/resources/lib/swiper-bundle.min.js"></script>
- 
   <script type="text/javascript" src="${contextPath}/resources/js/common.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=8ze2pCtEXZEBra8ProWgd2QGH69Ew8A4G6U6B6NC"></script>
 </head>
 <body>
-               <header>
+
+       
+   <header>
                 <!-- <div class="observer-layout"></div> -->
                 <!-- <section class="header-pc1 load">.load: setCommon 함수로 AJAX 로드</section> -->
                 <!-- <section class="header-mob load">.load: setCommon 함수로 AJAX 로드</section> -->
@@ -53,12 +52,11 @@ request.setCharacterEncoding("UTF-8");
             <section class="title_header" >
                 <article class="main_header">
                     <div id="header_bg">
-              <div class="car-icon">
+ <div class="car-icon">
                 <a href="${contextPath}/main.do" id="carIconLink">
                     <img src="${contextPath}/resources/assets/images/car-icon.png" alt="Car Icon">
                 </a>
-            </div>  
-                        <h1 class="header-title">예약 내역</h1>         
+            </div>         
             <div id="button_menu" class="button-menu open-menu">         
                 <img src = "${contextPath}/resources/assets/images/List.png" width="70" height="70"> 
            </div>
@@ -69,81 +67,14 @@ request.setCharacterEncoding("UTF-8");
 
 		</header>
 
-                <div class="container">
-
-                    <main id="mainpage">
-                    <!-- 검색 입력 필드 추가 -->
-                    <input type="text" id="searchInput" placeholder="🔍 시설명 검색..." class="search-input">
-                                   
-        <input type="date" id="datetimeFilter" class="datetime-input" placeholder="날짜 및 시간 선택">    
-<!--         <input type="datetime-local" id="datetimeFilter" class="datetime-input" placeholder="날짜 및 시간 선택"> -->
-            
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>시설명</th>
-                                <th>예약 날짜</th>
-                                <th>주차 시간</th>
-                                <th>출차 시간</th>
-                            </tr>
-                        </thead>
-                        <tbody id="reservationTable">
-                        			<c:choose>
-						<c:when test="${empty reservesList}">
-							<tr height="10">
-								<td colspan="4">
-									<p align="center">
-										<b><span style="font-size: 9pt;">예약 내역이 없습니다<br>지도에서 예약을 시작해보세요.</span></b>
-									</p>
-								</td>
-							</tr>
-						</c:when>
-						<c:when test="${not empty reservesList}">
-							<c:forEach var="reserve" items="${reservesList }">
-							
-							     <tr>
-                                <td><a href="${contextPath}/reservation/reservation_detail.do?rsvnum=${reserve.rsvnum}" class="facility-link">${reserve.name}</a></td>
-                                <td>${reserve.ptime}</td>
-                                <td>${reserve.ptime}</td>
-                                <td>${reserve.etime}</td>
-                            </tr>
-				
-							</c:forEach>
-						</c:when>
-					</c:choose>
-                        
-					<!-- 데이터 예시
-                            <tr>
-                                <td><a href="/pages/confirm_reservation.html" class="facility-link">서울타워 주차장</a></td>
-                                <td>2024-12-23</td>
-                                <td>14:00</td>
-                                <td>16:00</td>
-                            </tr> -->
-                            <!-- 데이터가 없을 경우 -->
-                            <!-- <tr>
-                                <td colspan="4" class="no-data">예약 내역이 없습니다.</td>
-                            </tr> -->
-                        </tbody>
-                    </table>
-                   </main>
-          
-                
-                <%-- <aside id="rightside" >
+    	    <jsp:include page="/WEB-INF/views/common/aside.jsp" />
+<%--                         <aside id="rightside" >
                     <section class="sidebar">
                         <article class="sidebar_title">
                             <div class="ux-title">
                                 <div class="account_name">
                                     <img src = "${contextPath}/resources/assets/images/Account.png" width="70" height="70"> 
-                                                             <c:choose>
-                                <c:when test="${isLogOn == true  && member!= null}">                                
-                                     <div>${member.name} 님</div>
-                                </c:when>
-                                <c:otherwise>
-                                    <div>로그인이 필요합니다.</div>
-                                
-                                </c:otherwise>
-        
-                                </c:choose>
+                                    <div>OOO님</div>
                                 </div>
                             
                             <div class="sideclose">
@@ -159,10 +90,10 @@ request.setCharacterEncoding("UTF-8");
                             <ul>               
                                 <c:choose>
                                 <c:when test="${isLogOn == true  && member!= null}">                                
-                  				<li><a href="${contextPath}/member/user_info.do" class="ux-link">회원 정보</a></li>
-                                <li><a href="${contextPath}/pages/memrsvlist.do" class="ux-link">예약 내역 조회</a></li>
+                                     <li><a href="/pages/user_info.html" class="ux-link">회원 정보</a></li>
+                                <li><a href="/pages/toList.do" class="ux-link">예약 내역 조회</a></li>
                                 <li><a href="/pages/user_info_edit.html" class="ux-link">개인 정보 수정</a></li>
-                                <li><a href="${contextPath}/member/logout.do" class="ux-link">로그아웃</a></li>
+                                             <li><a href="${contextPath}/member/logout.do" class="ux-link">로그아웃</a></li>
                                 </c:when>
                                 <c:otherwise>
                                      <li><a  href="${contextPath}/member/loginForm.do"class="ux-link button-mob-sign in">로그인</a></li>
@@ -178,10 +109,38 @@ request.setCharacterEncoding("UTF-8");
     </section>
     
         </aside> --%>
-    </div>
-    	    <jsp:include page="/WEB-INF/views/common/aside.jsp" />
-
+        <div class="container">	               
+                    <h4>현재 비밀번호를 입력해주세요</h4>
+                    <!-- 검색 입력 필드 추가 -->
+                 <form action="${contextPath}/member/modMemberForm.do" method="post">
+                    <input type="password"  id="searchInput" name="pwd" placeholder="현재 비밀번호" class="search-input">      
+                         <div class="btn-sign">
+                            <button type="submit" class="btn-signIn">수정하기</button>
+                            </div>   
+                    </form>                 
+                </div>
     <script>
+    
+    $("#searchInput").change(function() {
+    	 const inputElement = document.getElementById('searchInput');
+    	    let value = inputElement.value; 
+    	    console.log(value);
+
+    	    // 허용되지 않은 문자 정규식
+    	    const regExp = /[^0-9a-zA-Z!._^]/g; 
+
+    	    if (regExp.test(value)) {
+    	        alert("예약 번호는 영어, 숫자, 특수문자 !, ., _, ^만 입력 가능합니다.");
+
+    	        // 허용되지 않은 문자 제거
+    	        value = value.replace(regExp, '');
+
+    	        // 입력 필드 값 업데이트
+    	        inputElement.value = value;
+    	    }
+    	});
+    	 
+
      // 검색 기능
      document.getElementById('searchInput').addEventListener('input', function() {
         const query = this.value.toLowerCase();

@@ -51,8 +51,8 @@ request.setCharacterEncoding("UTF-8");
        
         <header class="header">
             <div class="car-icon">
-                <a href="/pages/main.html" id="carIconLink">
-                    <img src="${contextPath}/resources/assets/images/car-icon.png" alt="Car Icon" />
+        <a href="${contextPath}/main.do" id="carIconLink">
+                    <img src="${contextPath}/resources/assets/images/car-icon.png" alt="Car Icon">
                 </a>
             </div>
             <h1 class="header-title2">예약 조회</h1>
@@ -61,7 +61,8 @@ request.setCharacterEncoding("UTF-8");
         </header>
 
     </div>
-                        <aside id="rightside" >
+    	    <jsp:include page="/WEB-INF/views/common/aside.jsp" />
+ <%--                        <aside id="rightside" >
                     <section class="sidebar">
                         <article class="sidebar_title">
                             <div class="ux-title">
@@ -101,7 +102,7 @@ request.setCharacterEncoding("UTF-8");
                 </article>
     </section>
     
-        </aside>
+        </aside> --%>
         <div class="container">	               
                     <h3>예약 확인 번호를 입력해주세요</h3>
                     <!-- 검색 입력 필드 추가 -->

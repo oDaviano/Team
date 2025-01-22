@@ -115,11 +115,11 @@ $("#feeText").text("결제 금액: " + total+ "원");
 
  $("#hfee").val(total);
   console.log($("#hemail").val());
- if($("#hemail").val()!=null &&  $("hemail").val()!=""){
+
  mileageVal = Math.floor(total*0.02);
   $("#mileageText").text("+"+  mileageVal + "p");
 	$("#hmileage").val( mileageVal );
-	}
+	
   console.log(mileageVal);
  }
 

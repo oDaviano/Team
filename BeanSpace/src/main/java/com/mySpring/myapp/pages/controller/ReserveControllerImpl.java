@@ -68,21 +68,32 @@ public class ReserveControllerImpl implements ReserveController{
 	public ModelAndView addReserve(@ModelAttribute("reserve") ReserveVO reserve,
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
-		int result = 0;	
-		int chkrsv = reserveService.checkRsvnum();
-		reserve.setRsvnum(++chkrsv);
-
-		result = reserveService.addReserve(reserve);
-		
+		HttpSession session = request.getSession();
+		int uid = 0;
 		String viewName = (String)request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView(viewName);
-		HttpSession session = request.getSession();
+		int result = 0;	
+		int chkrsv = reserveService.selectCount();
 
-		MemberVO edit = (MemberVO)session.getAttribute("member");
+		reserve.setRsvnum(++chkrsv);
+		
+		result = reserveService.addRsvCount();
 
+
+		if(session.getAttribute("isLogOn")!=null && (boolean)session.getAttribute("isLogOn") ) {
+		uid = (int)session.getAttribute("userid");
+		MemberVO edit = memberService.selectMyInfo(uid);
+		reserve.setEmail(edit.getEmail());
 		edit.setMileage(reserve.getMileage()+ edit.getMileage());
-		memberService.updateMember(edit);
-		System.out.println("member:" +edit);
+		result = memberService.updateMileage(edit);
+		}
+	
+		System.out.println("email: "+ reserve.getEmail());
+
+		reserve.setUID(uid);
+		result = reserveService.addReserve(reserve);
+		reserveService.addRsvCount();
+
 		return mav;
 	}
 
@@ -92,18 +103,17 @@ public class ReserveControllerImpl implements ReserveController{
 			HttpServletResponse response) throws Exception {
 	    HttpSession session = request.getSession();
 
-	    String email =((MemberVO)session.getAttribute("member")).getEmail();	    
+	    int uid =(Integer)session.getAttribute("userid");	    
 	    System.out.println("rsvnum: "+ rsvnum);
 		reserveService.removeReserve(rsvnum);
 		
-		if(session.getAttribute("member") != null){
-		MemberVO edit = (MemberVO)session.getAttribute("member");
+		if((boolean)session.getAttribute("isLogOn")){
+		MemberVO edit = memberService.selectMyInfo(uid);
 		edit.setMileage(edit.getMileage()-mileage);
 		memberService.updateMember(edit);
 		}
 		
 		ModelAndView mav = new ModelAndView("redirect:/pages/memrsvlist.do");
-		mav.addObject("email",email);
 		
 		return mav;
 	}
@@ -112,6 +122,7 @@ public class ReserveControllerImpl implements ReserveController{
 	@RequestMapping(value = "/pages/list_reservation.do", method = RequestMethod.GET)
 	public ModelAndView selectReserves(@RequestParam("email")String email, HttpServletRequest request, HttpServletResponse response) throws Exception {
 
+		
 		System.out.println(email);
 		List<ReserveVO> reservesList = reserveService.selectMemberReserves(email);
 		ModelAndView mav = new ModelAndView("/pages/list_reservation");
@@ -125,15 +136,24 @@ public class ReserveControllerImpl implements ReserveController{
 	@RequestMapping(value = "/pages/memrsvlist.do", method = RequestMethod.GET)
 	public ModelAndView selectMemberReserves(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
+		
 		HttpSession session = request.getSession();
+		ModelAndView mav;
+		if(session.getAttribute("isLogOn")!=null &&(boolean)session.getAttribute("isLogOn") ) {
 		String viewName = (String) request.getAttribute("viewName");
-		String email = ((MemberVO)session.getAttribute("member")).getEmail();
+
+		int uid = (int)session.getAttribute("userid");
 		
 
-		List<ReserveVO> reservesList = reserveService.selectMemberReserves(email);
-		ModelAndView mav = new ModelAndView("/pages/list_reservation");
+		List<ReserveVO> reservesList = reserveService.selectMemberReserves(uid);
+		mav = new ModelAndView("/pages/list_reservation");
 		mav.addObject("reservesList", reservesList);
-		
+		}
+		else {
+			String viewName = (String) request.getAttribute("viewName");
+			mav = new ModelAndView("redirect:/main.do");
+
+		}
 		return mav;
 	}
 
@@ -142,6 +162,7 @@ public class ReserveControllerImpl implements ReserveController{
 	public ModelAndView buy( HttpServletRequest request, HttpServletResponse response) throws Exception {
 		HttpSession session = request.getSession();
 
+		
 		String viewName = (String) request.getAttribute("viewName");
 			ModelAndView mav = new ModelAndView(viewName);
 			return mav;

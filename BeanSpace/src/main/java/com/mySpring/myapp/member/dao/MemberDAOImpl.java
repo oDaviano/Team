@@ -16,17 +16,28 @@ public class MemberDAOImpl implements MemberDAO {
 	private SqlSession sqlSession;
 
 	@Override
-	public MemberVO  selectMyInfo(String email)throws DataAccessException {
-		MemberVO myInfo = sqlSession.selectOne("mapper.member.selectMyInfo");
+	public int selectCount() throws DataAccessException {
+		return sqlSession.selectOne("mapper.member.selectCount");
+	}
+	
+	@Override
+	public int addUserID() throws DataAccessException {
+		int result = sqlSession.update("mapper.member.addUIDCount");
+		return result;
+	}
+	
+	@Override
+	public MemberVO  selectMyInfo(int uid)throws DataAccessException {
+		MemberVO myInfo = sqlSession.selectOne("mapper.member.selectMyInfo", uid);
 		return myInfo;
 		
 	}
-	@Override
-	public List selectAllMemberList() throws DataAccessException {
-		List<MemberVO> membersList = null;
-		membersList = sqlSession.selectList("mapper.member.selectAllMemberList");
-		return membersList;
-	}
+//	@Override
+//	public List selectAllMemberList() throws DataAccessException {
+//		List<MemberVO> membersList = null;
+//		membersList = sqlSession.selectList("mapper.member.selectAllMemberList");
+//		return membersList;
+//	}
 
 	@Override
 	public int insertMember(MemberVO memberVO) throws DataAccessException {
@@ -34,11 +45,11 @@ public class MemberDAOImpl implements MemberDAO {
 		return result;
 	}
 
-	@Override
-	public int deleteMember(String email) throws DataAccessException {
-		int result = sqlSession.delete("mapper.member.deleteMember", email);
-		return result;
-	}
+//	@Override
+//	public int deleteMember(String email) throws DataAccessException {
+//		int result = sqlSession.delete("mapper.member.deleteMember", email);
+//		return result;
+//	}
 	
 	@Override
 	public MemberVO loginById(MemberVO memberVO) throws DataAccessException{
@@ -51,9 +62,24 @@ public class MemberDAOImpl implements MemberDAO {
     public int checkEmail(String email) throws DataAccessException {
         return sqlSession.selectOne("mapper.member.checkEmail", email);
     }
+	
+	@Override
+	public boolean checkPwd(String pwd) throws DataAccessException {
+		 return sqlSession.selectOne("mapper.member.checkPwd", pwd);
+	}
+	
 	@Override
 	public int updateMember(MemberVO memberVO) throws DataAccessException {
 		int result = sqlSession.update("mapper.member.updateMember", memberVO);
 		return result;
 	}
+
+	@Override
+	public int updateMileage(MemberVO memberVO) throws DataAccessException {
+		return sqlSession.update("mapper.member.updateMileage",memberVO);
+	}
+
+
+
+
 }

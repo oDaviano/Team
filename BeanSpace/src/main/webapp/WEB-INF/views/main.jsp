@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" isELIgnored="false"%>
+<%-- 	<%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"  %>  --%>   
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%
@@ -8,7 +9,6 @@ request.setCharacterEncoding("UTF-8");
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
 <!DOCTYPE html>
-<html>
 <html lang="ko" class="">
 <head>
   <meta charset="UTF-8">
@@ -49,15 +49,14 @@ request.setCharacterEncoding("UTF-8");
 <body id="mainbody">
     <div class="container">
         <header>
-                <!-- <div class="observer-layout"></div> -->
-                <!-- <section class="header-pc1 load">.load: setCommon 함수로 AJAX 로드</section> -->
-                <!-- <section class="header-mob load">.load: setCommon 함수로 AJAX 로드</section> -->
-
             <section class="title_header" >
                 <article class="main_header">
                     <div id="header_bg">
-            <div id="logo">          
-                <img src = "${contextPath}/resources/assets/images/car-icon.png" width="100" height="90"> </div>            
+            <div id="logo">
+                      <a href="${contextPath}/main.do" id="carIconLink">          
+                <img src = "${contextPath}/resources/assets/images/car-icon.png" width="100" height="90"> 
+                   </a>
+                   </div>            
             <div id="button_menu" class="button-menu open-menu">         
                 <img src = "${contextPath}/resources/assets/images/List.png" width="70" height="70"> 
            </div>
@@ -67,7 +66,8 @@ request.setCharacterEncoding("UTF-8");
         </section>
 
 		</header>
-        <aside id="rightside" >
+		    <jsp:include page="/WEB-INF/views/common/aside.jsp" />
+<%--         <aside id="rightside" >
                     <section class="sidebar">
                         <article class="sidebar_title">
                             <div class="ux-title">
@@ -75,8 +75,8 @@ request.setCharacterEncoding("UTF-8");
                                 
                                     <img src = "${contextPath}/resources/assets/images/Account.png" width="70" height="70"> 
                                                       <c:choose>
-                                <c:when test="${isLogOn == true  && member!= null}">                                
-                                     <div>${member.name} 님</div>
+                                <c:when test="${isLogOn == true}">                                
+                                     <div>${name} 님</div>
                                 </c:when>
                                 <c:otherwise>
                                     <div>로그인이 필요합니다.</div>
@@ -99,10 +99,10 @@ request.setCharacterEncoding("UTF-8");
                         <div class="menu-list">
                             <ul>               
                                 <c:choose>
-                                <c:when test="${isLogOn == true  && member!= null}">                                
+                                <c:when test="${isLogOn == true}">                                
                                 <li><a href="${contextPath}/member/user_info.do" class="ux-link">회원 정보</a></li>
                                 <li><a href="${contextPath}/pages/memrsvlist.do" class="ux-link">예약 내역 조회</a></li>
-                                <li><a href="/pages/user_info_edit.html" class="ux-link">개인 정보 수정</a></li>
+                                <li><a href="${contextPath}/member/checkpwdForm.do" class="ux-link">개인 정보 수정</a></li>
                                 <li><a href="${contextPath}/member/logout.do" class="ux-link">로그아웃</a></li>
                                 </c:when>
                                 <c:otherwise>
@@ -118,7 +118,7 @@ request.setCharacterEncoding("UTF-8");
                 </article>
     </section>
     
-        </aside>
+        </aside> --%>
 
         <main id="mainpage">
         <section class="area_search">

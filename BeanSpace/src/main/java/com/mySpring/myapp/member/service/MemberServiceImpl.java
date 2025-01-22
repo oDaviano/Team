@@ -11,8 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.mySpring.myapp.member.dao.MemberDAO;
 import com.mySpring.myapp.member.vo.MemberVO;
 
-
-
 @Service("memberService")
 @Transactional(propagation = Propagation.REQUIRED)
 public class MemberServiceImpl implements MemberService {
@@ -20,37 +18,46 @@ public class MemberServiceImpl implements MemberService {
 	private MemberDAO memberDAO;
 	
 	@Override
-	public MemberVO selectMyInfo(String email) throws DataAccessException {
-		return memberDAO.selectMyInfo(email);
+	public int selectCount() throws DataAccessException {
+			return memberDAO.selectCount();
 	}
 
 	@Override
-	public List listMembers() throws DataAccessException {
-		List membersList = null;
-		membersList = memberDAO.selectAllMemberList();
-		return membersList;
+	public int addUIDCount() throws DataAccessException {
+
+		return memberDAO.addUserID();
 	}
+	@Override
+	public MemberVO selectMyInfo(int uid) throws DataAccessException {
+		return memberDAO.selectMyInfo(uid);
+	}
+
+//	@Override
+//	public List listMembers() throws DataAccessException {
+//		List membersList = null;
+//		membersList = memberDAO.selectAllMemberList();
+//		return membersList;
+//	}
 
 	@Override
 	public int addMember(MemberVO member) throws DataAccessException {
 		return memberDAO.insertMember(member);
 	}
 
-	@Override
-	public int removeMember(String id) throws DataAccessException {
-		return memberDAO.deleteMember(id);
-	}
+//	@Override
+//	public int removeMember(String id) throws DataAccessException {
+//		return memberDAO.deleteMember(id);
+//	}
 	
 	@Override
 	public MemberVO login(MemberVO memberVO) throws Exception{
-
 		return memberDAO.loginById(memberVO);
 	}
 	
 	@Override
     public boolean isEmailAvailable(String email) throws DataAccessException {
         int count = memberDAO.checkEmail(email);
-        return count == 0; // email�씠 議댁옱�븯吏� �븡�쑝硫� true 諛섑솚
+        return count == 0; 
     }
 
 	@Override
@@ -58,7 +65,16 @@ public class MemberServiceImpl implements MemberService {
 		return memberDAO.updateMember(memberVO);
 	}
 
+	@Override
+	public boolean isPwdAvailable(String pwd) throws DataAccessException {
+		return memberDAO.checkPwd(pwd);
+	}
 
+	@Override
+	public int updateMileage(MemberVO memberVO) throws DataAccessException {
+		// TODO Auto-generated method stub
+		return memberDAO.updateMileage(memberVO);
+	}
 	
-
+	
 }
