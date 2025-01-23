@@ -141,7 +141,14 @@ request.setCharacterEncoding("UTF-8");
                             toggleSignupButton();
                         }
                     });
-                });
+                });               
+                
+                $("#email").on("propertychange change keyup paste input", function(){
+                    	isEmailValid = false;
+                    	console.log("changed");
+                    	toggleSignupButton(); 
+                       // $("#signup-btn").css("display", "none"); // 버튼 숨기기
+                    });
 
                 // 비밀번호 일치 확인
                 const password = $("#password");

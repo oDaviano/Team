@@ -81,7 +81,7 @@ $(function(){
 						<!-- 로그인 회원가입 버튼-->
 						<div class="btn-sign">
 						<button type="submit" class="btn-signIn">로그인</button>
-						<a href="${contextPath}/member/psh_memberForm.do" class="btn-signUp">회원가입</a>
+						<a href="${contextPath}/member/memberForm.do" class="btn-signUp">회원가입</a>
 						</div>
 
 						<!-- 소셜로그인 버튼영역 -->

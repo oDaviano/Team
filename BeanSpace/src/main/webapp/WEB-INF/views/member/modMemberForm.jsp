@@ -143,7 +143,10 @@ request.setCharacterEncoding("UTF-8");
                     });
                     
                     $("#email").change(function(){
-                        $("#signup-btn").css("display", "none"); // 버튼 숨기기
+                    	isEmailValid = false;
+                    	console.log("changed");
+                    	toggleSignupButton(); 
+                       // $("#signup-btn").css("display", "none"); // 버튼 숨기기
                     });
                 });
 
