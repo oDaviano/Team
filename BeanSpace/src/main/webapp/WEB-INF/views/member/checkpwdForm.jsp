@@ -28,6 +28,7 @@ request.setCharacterEncoding("UTF-8");
 
   <link type="text/css" rel="stylesheet" href="${contextPath}/resources/assets/css/font.css">
     <link type="text/css" rel="stylesheet" href="${contextPath}/resources/assets/css/common.css">
+      <link type="text/css" rel="stylesheet" href="${contextPath}/resources/assets/css/tmp_psh.css">
   <link type="text/css" rel="stylesheet" href="${contextPath}/resources/assets/css/tmp_njw.css">
   <link type="text/css" rel="stylesheet" href="${contextPath}/resources/assets/css/tmp_peg.css">
   <link type="text/css" rel="stylesheet" href="${contextPath}/resources/lib/jquery-ui-1.12.1.min.css">
@@ -68,56 +69,19 @@ request.setCharacterEncoding("UTF-8");
 		</header>
 
     	    <jsp:include page="/WEB-INF/views/common/aside.jsp" />
-<%--                         <aside id="rightside" >
-                    <section class="sidebar">
-                        <article class="sidebar_title">
-                            <div class="ux-title">
-                                <div class="account_name">
-                                    <img src = "${contextPath}/resources/assets/images/Account.png" width="70" height="70"> 
-                                    <div>OOO님</div>
-                                </div>
-                            
-                            <div class="sideclose">
-                                <button type="button" class="ux-button icon-only button-menu button-close" tabindex="0">
-                                    X
-                                </button>
-                            </div>
-                        </div>
-                        </article>
-                        <article>
-                    <div class="main">
-                        <div class="menu-list">
-                            <ul>               
-                                <c:choose>
-                                <c:when test="${isLogOn == true  && member!= null}">                                
-                                     <li><a href="/pages/user_info.html" class="ux-link">회원 정보</a></li>
-                                <li><a href="/pages/toList.do" class="ux-link">예약 내역 조회</a></li>
-                                <li><a href="/pages/user_info_edit.html" class="ux-link">개인 정보 수정</a></li>
-                                             <li><a href="${contextPath}/member/logout.do" class="ux-link">로그아웃</a></li>
-                                </c:when>
-                                <c:otherwise>
-                                     <li><a  href="${contextPath}/member/loginForm.do"class="ux-link button-mob-sign in">로그인</a></li>
-                                     <li><a href="/pages/toList.do" class="ux-link">예약 내역 조회</a></li>
-                                
-                                </c:otherwise>
-        
-                                </c:choose>
-                            </ul>
-                        </div>
-                    </div>
-                </article>
-    </section>
-    
-        </aside> --%>
-        <div class="container">	               
+
+        <div class="container">	  
+            		<div class="psh_own" style="margin-top: 25px;">             
                     <h4>현재 비밀번호를 입력해주세요</h4>
+                    
                     <!-- 검색 입력 필드 추가 -->
-                 <form action="${contextPath}/member/modMemberForm.do" method="post">
+                 <form action="${contextPath}/member/modMemberForm.do" method="post" class="checkForm">
                     <input type="password"  id="searchInput" name="pwd" placeholder="현재 비밀번호" class="search-input">      
-                         <div class="btn-sign">
+                         <div class="btn-edit">
                             <button type="submit" class="btn-signIn">수정하기</button>
                             </div>   
-                    </form>                 
+                    </form>  
+                    </div>               
                 </div>
     <script>
     

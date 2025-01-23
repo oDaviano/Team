@@ -703,7 +703,7 @@ footer {
 
 /* 공통 레이아웃  */
 body .container {
-  flex-grow: 1;
+  /*flex-grow: 1;*/
   flex-shrink: 1;
   flex-basis: auto;
   display: flex;
