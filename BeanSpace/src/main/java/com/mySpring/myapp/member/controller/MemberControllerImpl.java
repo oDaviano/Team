@@ -43,6 +43,22 @@ public class MemberControllerImpl   implements MemberController {
 		return mav;
 	}
 	
+	//1. 회원가입 후 로그인페이지 이동
+//	@Override
+//	@RequestMapping(value="/member/addMember.do" ,method = RequestMethod.POST)
+//	public ModelAndView addMember(@ModelAttribute("member") MemberVO member, HttpServletRequest request, HttpServletResponse response) throws Exception {
+//		request.setCharacterEncoding("utf-8");
+//		
+//		int counter = memberService.selectCount();
+//		int result= 0;
+//		member.setUID(++counter);
+//		result = memberService.addMember(member);
+//		result = memberService.addUIDCount();
+//		ModelAndView mav = new ModelAndView("redirect:/member/loginForm.do");
+//		return mav;
+//	}
+	
+	//2 회원가입후 로그인유지 메인페이지 이동
 	@Override
 	@RequestMapping(value="/member/addMember.do" ,method = RequestMethod.POST)
 	public ModelAndView addMember(@ModelAttribute("member") MemberVO member, HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -53,8 +69,19 @@ public class MemberControllerImpl   implements MemberController {
 		member.setUID(++counter);
 		result = memberService.addMember(member);
 		result = memberService.addUIDCount();
-		ModelAndView mav = new ModelAndView("redirect:/member/loginForm.do");
-		return mav;
+		if (result > 0) { // 회원가입 성공 시
+	        // 세션에 사용자 정보 저장 (자동 로그인 처리)
+	        HttpSession session = request.getSession();
+	        session.setAttribute("userid", member.getUID()); // 사용자 UID 저장
+	        session.setAttribute("name", member.getName()); // 사용자 이름 저장
+	        session.setAttribute("isLogOn", true); // 로그인 상태 설정
+
+	        // 메인 페이지로 리다이렉트
+	        return new ModelAndView("redirect:/main.do");
+	    } else {
+	        // 회원가입 실패 시 회원가입 폼 페이지로 리다이렉트
+	        return new ModelAndView("redirect:/member/memberForm.do");
+	    }
 	}
 	
 	@Override
