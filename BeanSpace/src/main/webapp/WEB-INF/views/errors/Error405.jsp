@@ -21,28 +21,63 @@ request.setCharacterEncoding("UTF-8");
 
 <link type="image/png" rel="shortcut icon" href="${contextPath}/resources/assets/images/favicon/favicon.png">
 <link type="text/css" rel="stylesheet" href="${contextPath}/resources/assets/css/font.css">
-<link type="text/css" rel="stylesheet" href="${contextPath}/resources/assets/css/common.css">
+<%-- <link type="text/css" rel="stylesheet" href="${contextPath}/resources/assets/css/common.css"> --%>
 
 <script type="text/javascript">var contextPath = "${contextPath}";</script>
 
 
 <title>405 Method Not Allowed</title>
 <style>
-	html, body,.container, section, main {width: 100%;height: 100%;}
-	article {width: 90%;height: 100%;align-items:flex-start;}
-	.my_div {
-		background-image: url("../resources/assets/images/common/ErrorBG.jpg");
-		background-size: cover;
-		}
-	.error_discrption {margin-top: 30px;}
+    body {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        /* background-color: #f4f4f4; */ 
+        color: #333;
+    }
+
+    .container {
+        text-align: center;
+    }
+
+    .error-image {
+        max-width: 450px; /* 이미지 크기 조정 */
+        margin-top: -400px;
+        
+    }
+
+    h1 {
+        font-size: 3rem;
+        margin: 0;
+        margin-top: -60px; /* 이미지 아래로 내리기 */
+    }
+
+    p {
+        font-size: 1.5rem;
+    }
+
+    button {
+    	margin-top: 30px;
+        background-color: #007BFF; 
+        color: white;
+        border: none;
+        padding: 12px 24px;
+        font-size: 1.2rem;
+        font-weight: bold;
+        border-radius: 8px;
+        cursor: pointer;
+        }
+        
 </style>
 </head>
 <body>
     <div class="container">
         <img class="error-image" src="${contextPath}/resources/assets/images/errorCar.png" alt="405 Error">
         <h1 class=>405</h1> <!-- h1에 error_title 클래스 적용 -->
-        <p class="error_title">요청한 HTTP 메서드는 이 리소스에서 허용되지 않습니다.</p>
-        <p class="error_discrption">다시 시도하거나, 필요한 경우 관리자에게 문의해 주세요.</p> <!-- 기존 설명 유지 -->
+        <p class="error_title">요청한 HTTP 메서드는<p>이 리소스에서 허용되지 않습니다.</p>
         <button type="button" onclick="location.href='${contextPath}/main.do'">홈으로 돌아가기</button>
     </div>
 </body>
