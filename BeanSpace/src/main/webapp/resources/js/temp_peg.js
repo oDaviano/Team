@@ -8,7 +8,7 @@ let searchKeyword;
 var oldVal;
 const clientID ="xMNXsGUYhQ4rJ5iYH0os";
 const clientSecret="Nhz6Qp0Uwg";
-
+var markers=[];
  $(function () {
   if($(".popup").length){
     popup = $(".popup");
@@ -111,8 +111,11 @@ var name = popup.find("#facname");
   var address= popup.find("#address");
   var fee= popup.find("#fee");
   var category= popup.find("#category");
-  for(let i = 0;i<20;i++){
 
+  var mapBounds = map.getBounds();
+  var  position;
+  //for(let i = 0;i<data.records.length;i++){
+    for(let i = 0;i<100;i++){
     datas.push(data.records[i]);
     var CustomOverlay = function(options) {
 
@@ -207,15 +210,53 @@ var name = popup.find("#facname");
         
       });
 
+   hideMarker(map, marker);
+markers.push(marker);
+console.log("marker number: "+i);
   }
 });
 });
 
 
+function updateMarkers(map, markers) {
+
+    var mapBounds = map.getBounds();
+    var marker, position;
+
+    for (var i = 0; i < markers.length; i++) {
+
+        marker = markers[i]
+        position = marker.getPosition();
+
+        if (mapBounds.hasLatLng(position)) {
+            showMarker(map, marker);
+        } else {
+            hideMarker(map, marker);
+        }
+    }
+}
+
+
+
+
+function showMarker(map, marker) {
+
+  if (marker.getMap()) return;
+  marker.setMap(map);
+}
+
+function hideMarker(map, marker) {
+
+  if (!marker.getMap()) return;
+  marker.setMap(null);
+}
+
 function onSuccessGeolocation(position) {
   var location = new naver.maps.LatLng(position.coords.latitude, position.coords.longitude);//내위치로 이둥
     map.setCenter(location); // 얻은 좌표를 지도의 중심으로 설정합니다.
    map.setZoom(15); // 지도의 줌 레벨을 변경합니다.
+
+   
 }
 
 function onErrorGeolocation(error) {
@@ -238,6 +279,11 @@ function onErrorGeolocation(error) {
 }
 
 $(window).on("load", function() {
+  naver.maps.Event.addListener(map, 'idle', function() {
+  console.log("moved");
+    updateMarkers(map, markers);
+});
+    updateMarkers(map, markers);
 });
 
  function setOverlay(callback){
