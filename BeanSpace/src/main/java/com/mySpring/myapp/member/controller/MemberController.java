@@ -22,6 +22,6 @@ public interface MemberController {
                               HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public ModelAndView logout(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public ModelAndView myInfo(HttpServletRequest request, HttpServletResponse response)throws Exception;
-	public boolean confirmEmail(String email);
+	public boolean confirmEmail(String email,HttpServletRequest request);
 	public ModelAndView confirmPwd(String pwd,HttpServletRequest request, HttpServletResponse response)throws Exception;
 }

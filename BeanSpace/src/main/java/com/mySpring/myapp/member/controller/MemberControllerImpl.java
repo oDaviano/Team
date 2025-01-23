@@ -219,9 +219,18 @@ public class MemberControllerImpl   implements MemberController {
 	@Override
 	@RequestMapping(value = "/member/confirmEmail.do", method = RequestMethod.POST)
 	@ResponseBody
-	public boolean confirmEmail(@RequestParam("email") String email) {
+	public boolean confirmEmail(@RequestParam("email") String email, HttpServletRequest request) {
 	    System.out.println("confirmEmail 호출됨: " + email);
+	   HttpSession session = request.getSession();
+	   
 	    boolean isAvailable = memberService.isEmailAvailable(email);
+	    
+	    if(session.getAttribute("isLogOn") != null && (boolean)session.getAttribute("isLogOn")) {
+	    	String curEmail  = memberService.selectMyInfo( ((int)session.getAttribute("userid"))).getEmail();
+	    	if(curEmail.equals(email)) {
+	    		isAvailable = true;
+	    	}
+	    }
     // View 이름을 명시하지 않고 데이터를 직접 전달
 	    return isAvailable;
 	}

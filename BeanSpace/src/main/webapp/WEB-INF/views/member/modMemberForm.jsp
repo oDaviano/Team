@@ -7,12 +7,10 @@
 request.setCharacterEncoding("UTF-8");
 %>
 <!DOCTYPE html>
-<html>
 <html lang="ko" class="">
 <head>
     <meta charset="UTF-8">
-    <title>회원가입</title>
-</head>    
+    <title>회원가입</title> 
   <meta charset="UTF-8">
   <meta http-equiv="Content-Style-Type" content="text/css">
   <meta http-equiv="Content-Script-Type" content="text/javascript">
