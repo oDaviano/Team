@@ -50,12 +50,13 @@
 <script>
 $(function(){
 	var session='<%=session.getAttribute("isLogIn")%>';
-		
+	 <% if (request.getAttribute("loginFailed") != null) { %>
+     alert("로그인에 실패하였습니다. 아이디와 비밀번호를 확인해주세요.");
+ <% } %>
 	  if(session!=null && session!='null'){
 		  window.location.replace('${contextPath}/member/user_info.do');
 		  $(location).attr();
 
-	   // location.href=loginForm;
 	  }
 });
 </script>

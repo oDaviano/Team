@@ -102,7 +102,7 @@ public class MemberControllerImpl   implements MemberController {
 	    }
 
 	}else {
-	   rAttr.addAttribute("result","loginFailed");
+		 rAttr.addFlashAttribute("loginFailed", true);
 	   mav.setViewName("redirect:/member/loginForm.do");
 	}
 	return mav;
