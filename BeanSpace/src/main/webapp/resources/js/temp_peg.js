@@ -114,8 +114,8 @@ var name = popup.find("#facname");
 
   var mapBounds = map.getBounds();
   var  position;
-  //for(let i = 0;i<data.records.length;i++){
-    for(let i = 0;i<100;i++){
+  for(let i = 0;i<data.records.length;i++){
+    //for(let i = 0;i<100;i++){
     datas.push(data.records[i]);
     var CustomOverlay = function(options) {
 
@@ -130,7 +130,7 @@ var name = popup.find("#facname");
     
     CustomOverlay.prototype.onAdd = function() {
         var overlayLayer = this.getPanes().overlayLayer;
-        this._element.appendTo(overlayLayer);
+        this._element.appendTo(overlayLayer);      
         this._element.on('click', function(e) {
 		var addr;
           e.stopPropagation(); // 이벤트 전파 차단
@@ -157,12 +157,12 @@ var name = popup.find("#facname");
       }
       oldsel = this;
       $(oldsel).addClass('selected');
-            sessionStorage.setItem("basefee", datas[i]["주차기본요금"]);
+      sessionStorage.setItem("basefee", datas[i]["주차기본요금"]);
       sessionStorage.setItem("basetime", datas[i]["주차기본시간"]);
       sessionStorage.setItem("utime", datas[i]["추가단위시간"]);
       sessionStorage.setItem("addfee", datas[i]["추가단위요금"]);
       sessionStorage.setItem("address", address.text());
- sessionStorage.setItem("name", name.text());
+      sessionStorage.setItem("name", name.text());
       });
 
  
@@ -223,12 +223,14 @@ function updateMarkers(map, markers) {
     var mapBounds = map.getBounds();
     var marker, position;
 
+var zoom = map.getZoom();
+    console.log(map.getZoom());
     for (var i = 0; i < markers.length; i++) {
 
         marker = markers[i]
         position = marker.getPosition();
 
-        if (mapBounds.hasLatLng(position)) {
+        if (mapBounds.hasLatLng(position) && (zoom >14) ) {
             showMarker(map, marker);
         } else {
             hideMarker(map, marker);
@@ -280,7 +282,6 @@ function onErrorGeolocation(error) {
 
 $(window).on("load", function() {
   naver.maps.Event.addListener(map, 'idle', function() {
-  console.log("moved");
     updateMarkers(map, markers);
 });
     updateMarkers(map, markers);

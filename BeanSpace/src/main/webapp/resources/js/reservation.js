@@ -29,6 +29,9 @@ var notContain = /[~@#$%";',&*()+|</>=>`?:{[}]/g;
 //	$("#hfee").val(basefee + ((utime * 5 - basetime) * addfee));
 	//$("#hmileage").val( Math.round((basefee + (utime * 5 - basetime) * addfee)*0.02));
 
+
+
+
 	$("#hname").val(name);
 	$("#rsvnum").val(dummy);
 /*
