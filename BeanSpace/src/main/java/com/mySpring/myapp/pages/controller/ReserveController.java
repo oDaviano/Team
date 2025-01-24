@@ -6,13 +6,14 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.mySpring.myapp.member.vo.MemberVO;
 import com.mySpring.myapp.pages.vo.ReserveVO;
 
 public interface ReserveController {
 	
-	ModelAndView buy(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	ModelAndView buy(HttpServletRequest request,RedirectAttributes redirectAttributes,  HttpServletResponse response) throws Exception;
 	ModelAndView addReserve(ReserveVO reserve, HttpServletRequest request, HttpServletResponse response)
 			throws Exception;
 	ModelAndView removeReserve(int rsvnum,int mileage, HttpServletRequest request, HttpServletResponse response) throws Exception;

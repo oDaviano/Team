@@ -117,7 +117,7 @@ var mileageVal = 0;
 $("#feeText").text("결제 금액: " + total+ "원");
 
  $("#hfee").val(total);
-  console.log($("#hemail").val());
+
 
  mileageVal = Math.floor(total*0.02);
   $("#mileageText").text("+"+  mileageVal + "p");
@@ -140,7 +140,16 @@ count = 0;
 
      }
         count = (etime.valueAsNumber-ptime.valueAsNumber)/60000-basetime;
-       if(count<0)count=0;	
-      var total =basefee + (count/utime) * addfee;
+   
+
+              if(count<0)count=0;	
+   console.log(count);
+
+      var total
+      if(utime<=0)
+       total=basefee;
+       else
+              total=basefee + (count/utime) * addfee;
+      console.log(total);
        setFee(total);      	
 }

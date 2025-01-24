@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.mySpring.myapp.member.dao.MemberDAO;
 import com.mySpring.myapp.member.service.MemberService;
@@ -74,11 +75,12 @@ public class ReserveControllerImpl implements ReserveController{
 		ModelAndView mav = new ModelAndView(viewName);
 		int result = 0;	
 		int chkrsv = reserveService.selectCount();
-
+		
 		reserve.setRsvnum(++chkrsv);
 		
 		result = reserveService.addRsvCount();
-
+		session.removeAttribute("carnum");
+		session.removeAttribute("phone");
 
 		if(session.getAttribute("isLogOn")!=null && (boolean)session.getAttribute("isLogOn") ) {
 		uid = (int)session.getAttribute("userid");
@@ -159,10 +161,16 @@ public class ReserveControllerImpl implements ReserveController{
 
 	@Override
 	@RequestMapping(value = "/reservation/reservation.do", method = RequestMethod.POST)
-	public ModelAndView buy( HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ModelAndView buy(HttpServletRequest request, RedirectAttributes redirectAttributes, HttpServletResponse response) throws Exception {
 		HttpSession session = request.getSession();
 
+		if(session.getAttribute("isLogOn")!=null && (boolean)session.getAttribute("isLogOn")) {
+		MemberVO memberVO = memberService.selectMyInfo((int)session.getAttribute("userid"));
 		
+		session.setAttribute("carnum", memberVO.getCarnum());
+		session.setAttribute("phone",memberVO.getPhone());
+		System.out.println(memberVO.getCarnum());
+		}
 		String viewName = (String) request.getAttribute("viewName");
 			ModelAndView mav = new ModelAndView(viewName);
 			return mav;

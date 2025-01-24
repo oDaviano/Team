@@ -51,18 +51,15 @@ request.setCharacterEncoding("UTF-8");
 </head>
 <script>
 $(function () {
-	 $("#car-number").val("${member.getCarnum()}");
-	 $("#phone-number").val("${member.getPhone()}");
+	if("${isLogOn}"){
+	 $("#car-number").val("${carnum}");
+	 $("#phone-number").val("${phone}");
+	}
 	 $("#hemail").val("${member.getEmail()}");  
 		setFee(0);
-		
-	
 });
 
-function onSubmit(){
-	let f = document.forms;
-	alert(f.ptime.value);
-}
+
 </script>
 <body>
 	<div class="container">
@@ -71,7 +68,7 @@ function onSubmit(){
 			<img src="${contextPath}/resources/assets/images/car-icon.png"
 				alt="Car Icon">
 		</div>
-		<form action="${contextPath}/reservation/reservation_confirm.do" method="post" name="forms" onSubmit='{()=> return onSubmit()}'>
+		<form action="${contextPath}/reservation/reservation_confirm.do" method="post" name="forms" >
 			<label for="parking-time">주차 시간</label> 
 			<input type="datetime-local" id="parking-time" name="ptime" onchange="setMinValue()"> 
 			<label for="exit-time">출차 시간</label> <input type="datetime-local" id="exit-time" name="etime" onchange="setMinValue()"> 

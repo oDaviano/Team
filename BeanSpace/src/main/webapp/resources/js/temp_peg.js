@@ -145,6 +145,9 @@ var name = popup.find("#facname");
       if(datas[i]["요금정보"]=="무료"){
         fee.text("무료");
       }
+      else if(datas[i]["추가단위시간"]==""){
+        fee.text(datas[i]["주차기본요금"]+"원");
+      }
       else{
         fee.text(datas[i]["주차기본요금"]+"원, "
       +datas[i]["주차기본시간"]+"분 이후 "+datas[i]["추가단위시간"]+"분마다 "+datas[i]["추가단위요금"]+"원");
@@ -159,8 +162,10 @@ var name = popup.find("#facname");
       $(oldsel).addClass('selected');
       sessionStorage.setItem("basefee", datas[i]["주차기본요금"]);
       sessionStorage.setItem("basetime", datas[i]["주차기본시간"]);
+      if(datas[i]["추가단위시간"]!=""){
       sessionStorage.setItem("utime", datas[i]["추가단위시간"]);
       sessionStorage.setItem("addfee", datas[i]["추가단위요금"]);
+      }
       sessionStorage.setItem("address", address.text());
       sessionStorage.setItem("name", name.text());
       });
@@ -206,11 +211,12 @@ var name = popup.find("#facname");
     let marker =new CustomOverlay({
         position: new naver.maps.LatLng(datas[i]["위도"],datas[i]["경도"]),
         map:map,
-        zIndex:100
+        zIndex:100,
+        map:null
         
       });
 
-   hideMarker(map, marker);
+  // hideMarker(map, marker);
 markers.push(marker);
 console.log("marker number: "+i);
   }
