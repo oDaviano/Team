@@ -79,6 +79,12 @@ public class MemberDAOImpl implements MemberDAO {
 		return sqlSession.update("mapper.member.updateMileage",memberVO);
 	}
 
+	@Override
+	public String findPwd(String email) throws DataAccessException {
+		return sqlSession.selectOne("mapper.member.findPwd",email);
+
+	}
+
 
 
 

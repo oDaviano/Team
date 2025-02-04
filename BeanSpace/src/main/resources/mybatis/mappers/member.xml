@@ -36,6 +36,14 @@
 	</select>
 
 
+	<select id="findPwd" resultType="String">
+	      <![CDATA[
+  	 SELECT pwd FROM bs_member 
+  	 WHERE email = #{email}
+      ]]>
+	
+	</select>
+
 	<select id="selectAllMemberList" resultMap="memResult">
       <![CDATA[
          select * from bs_member	order by joinDate desc	 	

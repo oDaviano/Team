@@ -72,8 +72,12 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public int updateMileage(MemberVO memberVO) throws DataAccessException {
-		// TODO Auto-generated method stub
 		return memberDAO.updateMileage(memberVO);
+	}
+
+	@Override
+	public String findPwd(String email) throws DataAccessException {
+		return memberDAO.findPwd(email);
 	}
 	
 	

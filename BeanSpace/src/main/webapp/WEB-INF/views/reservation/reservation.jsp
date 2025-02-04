@@ -54,8 +54,9 @@ $(function () {
 	if("${isLogOn}"){
 	 $("#car-number").val("${carnum}");
 	 $("#phone-number").val("${phone}");
-	}
 	 $("#hemail").val("${member.getEmail()}");  
+	}
+
 		setFee(0);
 });
 
@@ -86,7 +87,7 @@ $(function () {
 					<input type="text" id="hemail" name="email" onchage="checkReg()"></input>
 				</c:when>
 				<c:otherwise>
-					<div id="mileageText" class="info red">+</div>
+					<div id="mileageText" class="info red"></div>
 				</c:otherwise>
 
 

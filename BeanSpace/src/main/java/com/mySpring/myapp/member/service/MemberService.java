@@ -18,4 +18,5 @@ public interface MemberService {
 	 public boolean isEmailAvailable(String email) throws DataAccessException;
 	 public boolean isPwdAvailable(String pwd) throws DataAccessException;
 	 public int updateMileage (MemberVO memberVO) throws DataAccessException;
+	 public String findPwd(String email) throws DataAccessException;
 }

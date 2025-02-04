@@ -15,7 +15,7 @@ request.setCharacterEncoding("UTF-8");
                             <div class="ux-title">
                                 <div class="account_name">
                                 
-                                    <img src = "${contextPath}/resources/assets/images/Account.png" width="70" height="70"> 
+                                    <%-- <img src = "${contextPath}/resources/assets/images/Account.png" width="70" height="70">  --%>
                                                       <c:choose>
                                 <c:when test="${isLogOn == true}">                                
                                      <div>${name} 님</div>

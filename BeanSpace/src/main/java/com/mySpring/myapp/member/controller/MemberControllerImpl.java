@@ -257,5 +257,26 @@ public class MemberControllerImpl   implements MemberController {
 		}
 		return mav;
 }
+
+	@Override
+	@RequestMapping(value = "/member/findPwd.do", method = RequestMethod.POST)
+	public ModelAndView findPwd(@RequestParam("email") String email,RedirectAttributes rAttr, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+
+		String pwd = memberService.findPwd(email);
+		ModelAndView mav = new ModelAndView();
+		System.out.println(pwd);
+		if(pwd!=null) {
+			 rAttr.addFlashAttribute("msg", "비밀번호는 [" +pwd+"] 입니다.");
+			   mav.setViewName("redirect:/member/loginForm.do");;
+		}else {
+			
+			 rAttr.addFlashAttribute("msg", "등록되지 않은 이메일입니다.");
+			   mav.setViewName("redirect:/member/findPwdForm.do");
+		}
+	
+		System.out.println(pwd);
+		return mav;
+	}
 	
 }

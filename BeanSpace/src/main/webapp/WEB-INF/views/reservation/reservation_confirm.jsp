@@ -41,7 +41,6 @@ request.setCharacterEncoding("UTF-8");
 </head>
 <script>
 
-
 </script>
 <body>
 <div class="container">
@@ -61,8 +60,13 @@ request.setCharacterEncoding("UTF-8");
 
     <div id = "fee" class="info"><strong>결제 금액:</strong> ${reserve.getFee()}</div>
         <c:choose>
-   <c:when test="${isLogOn == true}"> 
-    <div id = "mileage" class="info red">${reserve.getMileage()}</div></c:when></c:choose>
+   <c:when test="${$isLogOn!=null &&isLogOn == true}"> 
+    <div id = "mileage" class="info red">${reserve.getMileage()}</div>
+    </c:when>
+         <c:otherwise>
+          <div></div>
+         </c:otherwise>
+   </c:choose>
   </div>
 
   <div class="icon">

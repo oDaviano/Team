@@ -58,16 +58,16 @@ $(function(){
 		  $(location).attr();
 
 	  }
+		var msg = "${msg}";
+		  if (msg!= null && msg!="") { 
+	     	alert(msg);
+		  }
 });
 </script>
 
 <body>
     <div class="container">
         <header>
-			<!-- <div class="observer-layout"></div>
-			<section class="header-pc1 load">.load: setCommon 함수로 AJAX 로드</section>
-			<section class="header-pc2 load">.load: setCommon 함수로 AJAX 로드</section> 추가 작업용 보류
-			<section class="header-mob load">.load: setCommon 함수로 AJAX 로드</section> -->
 		</header>
 
         <main class="psh_own">
@@ -81,27 +81,30 @@ $(function(){
 						<!-- 로그인 회원가입 버튼-->
 						<div class="btn-sign">
 						<button type="submit" class="btn-signIn">로그인</button>
-						<a href="${contextPath}/member/memberForm.do" class="btn-signUp">회원가입</a>
+						<a href="${contextPath}/member/memberForm.do" class="btn-signUp">회원가입</a>	
+						<a href="${contextPath}/member/findPwdForm.do" class="btn-signUp">비밀번호 찾기</a>
+
 						</div>
 
-						<!-- 소셜로그인 버튼영역 -->
-						<div class="social-login">
+								<!-- 비밀번호 찾기 -->				
+						</form>
+									<!-- 소셜로그인 버튼영역 -->
+					<div class="social-login">
 							<!-- 구글 로그인 버튼 -->
-                            <button class="btn-social btn-google">
+                          		<%--   <button class="btn-social btn-google">
                                 <img src="${contextPath}/resources/assets/images/login/google.png" alt="Google Logo">
-                            </button>
+                            </button> --%>
 							<!-- 네이버 로그인 버튼 -->
-                            <button class="btn-social btn-naver">
+ <%--                            <button class="btn-social btn-naver">
                                 <img src="${contextPath}/resources/assets/images/login/naver.png" alt="Naver Logo">
-                            </button>
+                            </button> --%>
 							<!-- 카카오 로그인 버튼 -->
-                            <button class="btn-social btn-kakao">
+                          	<%--   <button class="btn-social btn-kakao">
                                 <img src="${contextPath}/resources/assets/images/login/kakao.png" alt="Kakao Logo">
-                            </button>
-                        </div>
+                            </button>--%>
+                        </div> 
 						<!-- 닫기버튼 여부 -->
-
-					</form>
+						
 				</div>
 		</main>
 

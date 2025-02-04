@@ -14,6 +14,16 @@ var notContain = /[~@#$%";',&*()+|</>=>`?:{[}]/g;
  addfee=Number(sessionStorage.getItem("addfee"));
  address = sessionStorage.getItem("address");
  name = sessionStorage.getItem("name");
+ console.log("추가요금??:"+addfee);
+ 
+   sessionStorage.removeItem("basefee");
+      sessionStorage.removeItem("basetime");
+
+      sessionStorage.removeItem("utime");
+      sessionStorage.removeItem("addfee");
+
+      sessionStorage.removeItem("address");
+      sessionStorage.removeItem("name");
     
    	dummy = 5;
       let ptime = document.getElementById('parking-time');
@@ -146,7 +156,7 @@ count = 0;
    console.log(count);
 
       var total
-      if(utime<=0)
+      if(addfee!=null && addfee<=0)
        total=basefee;
        else
               total=basefee + (count/utime) * addfee;
